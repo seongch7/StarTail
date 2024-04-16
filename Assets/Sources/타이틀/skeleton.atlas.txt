@@ -1,0 +1,6 @@
+skeleton.png
+size:4096,2048
+filter:Linear,Linear
+꼬리별(백)
+bounds:2,2,2085,1432
+offsets:147,0,2232,1613

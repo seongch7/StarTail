@@ -1,0 +1,138 @@
+skeleton.png
+	size: 4096, 4096
+	filter: Linear, Linear
+Tail_000
+	bounds: 2, 1674, 2500, 1670
+Tail_001
+	bounds: 2, 2, 2500, 1670
+
+skeleton_2.png
+	size: 4096, 4096
+	filter: Linear, Linear
+Tail_002
+	bounds: 2, 1674, 2500, 1670
+Tail_003
+	bounds: 2, 2, 2500, 1670
+
+skeleton_3.png
+	size: 4096, 4096
+	filter: Linear, Linear
+Tail_004
+	bounds: 2, 1674, 2500, 1670
+Tail_005
+	bounds: 2, 2, 2500, 1670
+
+skeleton_4.png
+	size: 4096, 4096
+	filter: Linear, Linear
+Tail_006
+	bounds: 2, 1674, 2500, 1670
+Tail_007
+	bounds: 2, 2, 2500, 1670
+
+skeleton_5.png
+	size: 4096, 4096
+	filter: Linear, Linear
+Tail_008
+	bounds: 2, 1674, 2500, 1670
+Tail_009
+	bounds: 2, 2, 2500, 1670
+
+skeleton_6.png
+	size: 4096, 4096
+	filter: Linear, Linear
+Tail_010
+	bounds: 2, 2423, 2500, 1670
+가죽모자@3x
+	bounds: 1557, 1935, 566, 486
+귀 오 노랑@3x
+	bounds: 2352, 1267, 303, 306
+귀 오 분홍@3x
+	bounds: 947, 2155, 172, 266
+귀 왼 노랑@3x
+	bounds: 346, 2164, 257, 325
+	rotate: 90
+귀 왼 분홍@3x
+	bounds: 1383, 35, 164, 289
+	rotate: 90
+기본 눈썹@3x
+	bounds: 2, 2, 190, 45
+꼬리@3x
+	bounds: 2, 534, 1553, 1614
+눈동자 오@3x
+	bounds: 1883, 56, 143, 184
+	rotate: 90
+눈동자 왼@3x
+	bounds: 2360, 798, 86, 162
+다리 아래 오@3x
+	bounds: 1557, 567, 236, 342
+	rotate: 90
+다리 아래 왼@3x
+	bounds: 2, 2184, 237, 342
+	rotate: 90
+모자 뒤@3x
+	bounds: 1557, 1367, 566, 486
+	rotate: 90
+모자@3x
+	bounds: 1082, 45, 299, 154
+몸통@3x
+	bounds: 2352, 962, 303, 301
+	rotate: 90
+바지 오@3x
+	bounds: 2045, 1374, 199, 301
+	rotate: 90
+바지 왼@3x
+	bounds: 779, 8, 191, 301
+	rotate: 90
+벨트@3x
+	bounds: 1901, 569, 234, 78
+	rotate: 90
+셔츠 뒤@3x
+	bounds: 673, 2183, 238, 272
+	rotate: 90
+손 아래 오@3x
+	bounds: 2019, 572, 358, 339
+	rotate: 90
+손 아래 왼@3x
+	bounds: 2045, 1575, 358, 339
+	rotate: 90
+손 위 오@3x
+	bounds: 2349, 11, 199, 275
+	rotate: 90
+손 위 왼@3x
+	bounds: 2071, 11, 199, 276
+	rotate: 90
+얼굴@3x
+	bounds: 1557, 805, 460, 560
+영혼눈 오@3x
+	bounds: 1121, 2150, 20, 38
+오른쪽 바지@3x
+	bounds: 1121, 2190, 105, 231
+왼쪽 바지@3x
+	bounds: 1228, 2190, 105, 231
+입@3x
+	bounds: 2360, 574, 103, 19
+	rotate: 90
+전체@3x
+	bounds: 2504, 2150, 1553, 1943
+	offsets: 326, 264, 2067, 2470
+케이프 뒤@3x
+	bounds: 779, 201, 644, 331
+케이프 리본@3x
+	bounds: 2360, 679, 117, 97
+	rotate: 90
+케이프 아래 뒤@3x
+	bounds: 2, 49, 775, 483
+케이프 아래 오 뒤@3x
+	bounds: 2071, 212, 320, 358
+케이프 아래 오@3x
+	bounds: 2019, 932, 331, 433
+케이프 아래 왼@3x
+	bounds: 2125, 1985, 321, 436
+케이프@3x
+	bounds: 1425, 201, 644, 331
+흰자 오@3x
+	bounds: 1335, 2190, 204, 231
+흰자 왼@3x
+	bounds: 1674, 76, 123, 207
+	rotate: 90

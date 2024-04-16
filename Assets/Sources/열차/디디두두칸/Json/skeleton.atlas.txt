@@ -1,0 +1,16 @@
+skeleton.png
+	size: 2048, 1024
+	filter: Linear, Linear
+근경 선인장
+	bounds: 2, 2, 472, 376
+	offsets: 29, 29, 519, 435
+근경 옥수수
+	bounds: 2, 380, 651, 565
+	offsets: 6, 21, 683, 608
+뱀 포스터
+	bounds: 655, 424, 145, 433
+	rotate: 90
+쇼파
+	bounds: 655, 571, 765, 374
+조명
+	bounds: 1422, 736, 157, 209

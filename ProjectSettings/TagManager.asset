@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Enemy
+  - Item
+  - Light
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Wall
+  - Water
+  - UI
+  - Enemy
+  - Player
+  - PlayerDamaged
+  - Object
+  - Pet
+  - Ground
+  - ForeGround
+  - Background
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Sky
+    uniqueID: 1588002015
+    locked: 0
+  - name: Moon
+    uniqueID: 696343829
+    locked: 0
+  - name: Poster
+    uniqueID: 1155958431
+    locked: 0
+  - name: Carpet
+    uniqueID: 3308506765
+    locked: 0
+  - name: BackGround
+    uniqueID: 3125216537
+    locked: 0
+  - name: Object
+    uniqueID: 2650479541
+    locked: 0
+  - name: Leaf
+    uniqueID: 1015991471
+    locked: 0
+  - name: Gier
+    uniqueID: 2478822443
+    locked: 0
+  - name: Chair
+    uniqueID: 2848059279
+    locked: 0
+  - name: Player
+    uniqueID: 3053305875
+    locked: 0
+  - name: Foreground
+    uniqueID: 3160901113
+    locked: 0
+  - name: Platform
+    uniqueID: 219223757
+    locked: 0
+  - name: Title
+    uniqueID: 2041434219
+    locked: 0
+  - name: Star
+    uniqueID: 3317241837
+    locked: 0
+  - name: Button
+    uniqueID: 440911669
+    locked: 0
+  - name: ForeGround
+    uniqueID: 1462334309
+    locked: 0
+  - name: Cloud
+    uniqueID: 2155384907
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0

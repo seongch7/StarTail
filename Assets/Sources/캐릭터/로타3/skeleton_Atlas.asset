@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
+  m_Name: skeleton_Atlas
+  m_EditorClassIdentifier: 
+  textureLoadingMode: 0
+  onDemandTextureLoader: {fileID: 0}
+  atlasFile: {fileID: 4900000, guid: 7eea3c21c20a17542941b0206477b32f, type: 3}
+  materials:
+  - {fileID: 2100000, guid: ba31266d95e646f4d8a874563fdb4d65, type: 2}
+  - {fileID: 2100000, guid: cced4ca0c6e09ba47a97b49c968edea5, type: 2}
+  - {fileID: 2100000, guid: d087907912be7e546a9e275ebb6ef65b, type: 2}
+  - {fileID: 2100000, guid: b42cc316bd5a0a0469ed0cfe67040961, type: 2}
+  - {fileID: 2100000, guid: 3a659c5ad17ec334982e4b085e1a7ed2, type: 2}
+  - {fileID: 2100000, guid: 33c58519d7b769845959755ff6d1b228, type: 2}
+  - {fileID: 2100000, guid: e1bc0d6c4cd599d47a01d5b32da1cdac, type: 2}
+  - {fileID: 2100000, guid: 2e7f3c8bd92297d4ebd1d5431ee5d9ca, type: 2}
+  - {fileID: 2100000, guid: 6c0d0a3b9c16f334ba69f621f7ed5af5, type: 2}
+  - {fileID: 2100000, guid: 09358f393ce6ae34596bffaf1cff6db9, type: 2}
+  - {fileID: 2100000, guid: 6caf387857b390c41a4950a273c222cd, type: 2}
+  - {fileID: 2100000, guid: 0d97d299bb0499e4b872e45f0c477845, type: 2}
+  - {fileID: 2100000, guid: 9c67caa43e3831d4f8607ec30a119061, type: 2}
+  - {fileID: 2100000, guid: 804ae369c8f4cee4d94ccca5fbf95684, type: 2}
+  - {fileID: 2100000, guid: e3b99c7c0f99b1a4d93c96d9d5e347c0, type: 2}

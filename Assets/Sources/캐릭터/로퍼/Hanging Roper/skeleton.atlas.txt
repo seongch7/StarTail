@@ -1,0 +1,16 @@
+skeleton.png
+	size: 2048, 512
+	filter: Linear, Linear
+몸@3x
+	bounds: 2, 209, 274, 1792
+	rotate: 90
+방울@3x
+	bounds: 1897, 431, 47, 52
+손@3x
+	bounds: 2, 2, 149, 205
+오른눈@3x
+	bounds: 153, 93, 87, 114
+왼눈@3x
+	bounds: 1796, 372, 99, 111
+입@3x
+	bounds: 1796, 286, 45, 84

@@ -1,0 +1,22 @@
+skeleton.png
+	size: 4096, 1024
+	filter: Linear, Linear
+가위
+	bounds: 316, 39, 165, 313
+	rotate: 90
+근경1
+	bounds: 1080, 565, 1067, 457
+	offsets: 29, 29, 1118, 514
+근경2
+	bounds: 1080, 263, 899, 300
+	offsets: 28, 29, 956, 357
+뽑기
+	bounds: 2592, 710, 312, 403
+	rotate: 90
+소파
+	bounds: 2149, 732, 441, 290
+커튼
+	bounds: 2, 206, 1076, 816
+화분
+	bounds: 2, 2, 202, 312
+	rotate: 90

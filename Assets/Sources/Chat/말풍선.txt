@@ -1,0 +1,15 @@
+skeleton.png
+	size: 4096, 256
+	filter: Linear, Linear
+1-1@2x
+	bounds: 871, 110, 867, 105
+1-2@2x
+	bounds: 871, 3, 681, 105
+1-3@2x
+	bounds: 2890, 110, 427, 105
+2-1@2x
+	bounds: 2, 2, 867, 213
+2-2@2x
+	bounds: 1740, 2, 713, 213
+2-3@2x
+	bounds: 2455, 2, 433, 213

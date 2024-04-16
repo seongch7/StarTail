@@ -1,0 +1,17 @@
+skeleton.png
+	size: 4096, 2048
+	filter: Linear, Linear
+선들
+	bounds: 2, 1305, 3245, 648
+오른쪽 스피커
+	bounds: 2, 2, 289, 221
+옷걸이
+	bounds: 3278, 284, 649, 705
+의자
+	bounds: 3278, 991, 802, 962
+전체 기계2
+	bounds: 2, 225, 1078, 2183
+	offsets: 25, 0, 1134, 2208
+	rotate: 90
+조종기계
+	bounds: 2187, 193, 1089, 1110

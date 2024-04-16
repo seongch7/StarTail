@@ -1,0 +1,11 @@
+skeleton.png
+	size: 2048, 512
+	filter: Linear, Linear
+몸통 (2)@3x
+	bounds: 2, 114, 735, 226
+몸통@3x
+	bounds: 739, 36, 428, 304
+오른눈@3x
+	bounds: 2, 2, 101, 110
+왼눈@3x
+	bounds: 1169, 230, 99, 110

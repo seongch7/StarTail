@@ -1,0 +1,19 @@
+skeleton.png
+	size: 4096, 2048
+	filter: Linear, Linear
+근경1
+	bounds: 1178, 894, 432, 504
+	offsets: 29, 28, 474, 564
+근경2
+	bounds: 2, 105, 503, 478
+	offsets: 25, 27, 543, 535
+아지트
+	bounds: 2, 585, 1174, 813
+알전구
+	bounds: 2, 1400, 2366, 568
+인형
+	bounds: 2, 2, 144, 101
+커튼
+	bounds: 2370, 1432, 700, 536
+쿠션4 (2)
+	bounds: 3072, 1762, 235, 206

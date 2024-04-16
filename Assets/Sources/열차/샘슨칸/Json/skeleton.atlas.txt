@@ -1,0 +1,25 @@
+skeleton.png
+	size: 4096, 2048
+	filter: Linear, Linear
+공중식물1
+	bounds: 3550, 932, 269, 864
+공중식물2
+	bounds: 2378, 625, 341, 1083
+	rotate: 90
+꽃 화분
+	bounds: 1527, 389, 409, 388
+나뭇잎2
+	bounds: 2, 697, 1166, 1099
+책
+	bounds: 3821, 1186, 610, 256
+	offsets: 20, 29, 659, 313
+	rotate: 90
+책상
+	bounds: 2378, 968, 1170, 828
+커튼
+	bounds: 1170, 779, 1206, 1017
+풀
+	bounds: 977, 103, 548, 592
+	offsets: 0, 23, 567, 615
+해먹
+	bounds: 2, 2, 973, 693

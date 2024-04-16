@@ -1,0 +1,23 @@
+skeleton.png
+	size: 4096, 1024
+	filter: Linear, Linear
+Asset 13
+	bounds: 2383, 211, 97, 67
+Asset 14
+	bounds: 3043, 652, 286, 286
+Asset 15
+	bounds: 2, 2, 112, 228
+	rotate: 90
+Asset 16
+	bounds: 483, 239, 58, 58
+Asset 17
+	bounds: 2, 116, 479, 181
+근경 나무
+	bounds: 1359, 187, 1022, 751
+	offsets: 19, 7, 1052, 758
+근경 해바라기
+	bounds: 2, 299, 639, 1355
+	offsets: 10, 0, 653, 1363
+	rotate: 90
+쳇바퀴
+	bounds: 2383, 280, 658, 658
