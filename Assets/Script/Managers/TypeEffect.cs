@@ -8,7 +8,8 @@ public class TypeEffect : MonoBehaviour
     public float CharPerSeconds; // 1초당 나올 글자 수
     //public GameObject EndCursor;
     string targetMsg; // 원본 대화 내용 저장할 변수
-    public Text msgText;
+    [SerializeField]
+    private Text msgText;
     int index;
 
     private void Awake()

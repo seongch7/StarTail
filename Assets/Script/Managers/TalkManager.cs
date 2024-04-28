@@ -14,6 +14,7 @@ public class TalkManager : MonoBehaviour
     void GenerateData()
     {
         talkData.Add(1000, new string[] { "Hello Rota!" , "This is Unity World!qqqqqq\nasdasdsdddddd\nqwdqwdasdasd\nwrvcbcvhhghdfhd"});
+        talkData.Add(1001, new string[] { "qweqweqwe", "123456789" });
     }
 
     public string GetTalk(int id, int talkIndex)//문자열을 배열로 지정했기 때문에 몇번 째 문장을 가져올 것인지에 대한 index

@@ -288,8 +288,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Animation()
     {
-
-        if (isWall)
+        if (isWall) // 벽점프
         {
             anim.SetBool("isJump", false);
             anim.SetBool("isHang", true);
@@ -299,14 +298,16 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("isHang", false);
                 anim.SetBool("isJump", true);
             }
+            return;
         }
         else if (!isWall && playerRigidbody.velocity.y < 0)
         {
             anim.SetBool("isHang", false);
             anim.SetBool("isDrop", true);
+            return;
         }
 
-        if (!isGround)
+        if (!isGround) // 점프
         {
             if (playerRigidbody.velocity.y > 0)
                 anim.SetBool("isJump", true);
@@ -319,7 +320,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("isDrop", false);
         }
 
-        if (UnityEngine.Input.GetKey(KeyCode.LeftShift))
+        if (UnityEngine.Input.GetKey(KeyCode.LeftShift)) //달리기
         {
             if (playerRigidbody.velocity.normalized.x != 0)
             {
@@ -329,7 +330,8 @@ public class PlayerController : MonoBehaviour
             else
                 anim.SetBool("isRun", false);
         }
-        else
+
+        else // 걷기
         {
             if (playerRigidbody.velocity.normalized.x != 0)
             {
@@ -340,7 +342,7 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("isWalk", false);
         }
 
-        if (dashTime > 0)
+        if (dashTime > 0) // 대쉬
             anim.SetBool("isDash", true);
         else
             anim.SetBool("isDash", false);
