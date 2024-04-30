@@ -27,6 +27,7 @@ public class NewController : MonoBehaviour
     [SerializeField]
     bool isRun = false;
     bool isDash = false;
+    [SerializeField]
     bool isJump = false;
     bool isDrop = false;
     bool isHang = false;
@@ -84,14 +85,14 @@ public class NewController : MonoBehaviour
                     stateChange(State.IDLE);
                 }
                 break;
-            case State.JUMP:
-                if (!isJump)
+            case State.DROP:
+                if (!isDrop)
                 {
                     stateChange(State.IDLE);
                 }
                 break;
-            case State.DROP:
-                if(!isDrop)
+            case State.JUMP:
+                if (!isJump)
                 {
                     stateChange(State.IDLE);
                 }
@@ -103,6 +104,11 @@ public class NewController : MonoBehaviour
                 }
                 break;
         }
+        if (rigid.velocity.y < 0)
+        {
+            isJump = false;
+            isDrop = true;
+        }
         isWalk = false;
     }
 
@@ -113,35 +119,38 @@ public class NewController : MonoBehaviour
             case State.IDLE:
                 playerState = State.IDLE;
                 speed = 0f;
+                animator.SetInteger("state", 0);
                 break;
             case State.WALK:
                 playerState = State.WALK;
                 speed = walkSpeed;
+                animator.SetInteger("state", 1);
                 isWalk = true;
                 break;
             case State.RUN:
                 playerState = State.RUN;
                 speed = runSpeed;
+                animator.SetInteger("state", 2);
                 isRun = true;
-                break;
-            case State.DASH:
-                playerState = State.DASH;
-                isDash = true;
-                Invoke("stopCounter", 0.2f);
                 break;
             case State.JUMP:
                 playerState = State.JUMP;
-                if(jumpCount < 2)
-                    jumpCount++;
-                else
-                    jumpCount = 0;
-                isJump = true;
+                animator.SetInteger("state", 3);
                 break;
             case State.DROP:
                 playerState = State.DROP;
+                animator.SetInteger("state", 4);
+                isDrop = true;
+                break;
+            case State.DASH:
+                playerState = State.DASH;
+                animator.SetInteger("state", 5);
+                isDash = true;
+                Invoke("stopCounter", 0.2f);
                 break;
             case State.HANG:
                 playerState = State.HANG;
+                animator.SetInteger("state", 6);
                 break;
         }
     }
@@ -158,7 +167,29 @@ public class NewController : MonoBehaviour
             {
                 isRun = !isRun;
             }
-            
+
+            if(playerState != State.JUMP)
+            {
+                if (key == KeyCode.Space)
+                {
+                    isJump = true;
+                }
+            }
+
+            if (playerState != State.DASH)
+            {
+                if (key == KeyCode.X)
+                {
+                    stateChange(State.DASH);
+                }
+                else if (key != KeyCode.X)
+                {
+                    isWalk = true;
+                }
+            }
+            Move(key);
+
+            /*
             if (key == KeyCode.LeftArrow || key == KeyCode.RightArrow)
             {
                 isWalk = true;
@@ -168,7 +199,7 @@ public class NewController : MonoBehaviour
             {
                 stateChange(State.JUMP);
             }
-            else if(playerState == State.JUMP && rigid.velocity.y < 0)
+            else if(rigid.velocity.y < 0)
             {
                 stateChange(State.DROP);
             }
@@ -177,29 +208,59 @@ public class NewController : MonoBehaviour
             {
                 stateChange(State.DASH);
             }
-            Move(key);
+            */
         }
     }
 
     void Move(KeyCode key)
     {
-        if(playerState == State.DASH)
+        if (isJump && isDash)
+        {
+            speed = dashSpeed;
+            stateChange(State.DASH);
+        }
+        else if (isJump && isRun)
+        {
+            speed = runSpeed;
+            stateChange(State.JUMP);
+        }
+        else if(isJump && isWalk)
+        {
+            speed = walkSpeed;
+            stateChange(State.JUMP);
+        }
+        else if (isJump)
+        {
+            stateChange(State.JUMP);
+        }
+        else if (playerState == State.DASH)
         {
             speed = dashSpeed;
         }
-        else if(isRun)
+        else if (isRun)
         {
             stateChange(State.RUN);
         }
-        else if(isWalk)
+        else if (isWalk)
         {
             stateChange(State.WALK);
+        }
+
+        if(isDrop && isDash)
+        {
+            speed = dashSpeed;
+            stateChange(State.DASH);
+        }
+        else if (isDrop)
+        {
+            stateChange(State.DROP);
         }
 
         if (key == KeyCode.Space)
         {
             if (jumpCount < 2)
             {
+                jumpCount++;
                 rigid.velocity = new Vector2(rigid.velocity.x, 0);
                 rigid.AddForce(new Vector2(0, jumpForce));
             }
@@ -223,5 +284,14 @@ public class NewController : MonoBehaviour
     {
         transform.eulerAngles = new Vector3(0, Mathf.Abs(transform.eulerAngles.y - 180), 0);
         isRight = isRight * -1;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.contacts[0].normal.y > 0.7f)
+        {
+            isDrop = false;
+            jumpCount = 0;
+        }
     }
 }
