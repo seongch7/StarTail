@@ -40,6 +40,11 @@ public class InputManager : MonoBehaviour
             {
                 KeyAction.Invoke(KeyCode.X);
             }
+
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                KeyAction.Invoke(KeyCode.Z);
+            }
         }
     }
 

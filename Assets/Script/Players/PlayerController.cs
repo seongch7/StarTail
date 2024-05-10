@@ -238,7 +238,7 @@ public class PlayerController : MonoBehaviour
         playerRigidbody.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
 
         MonsterMove monsterMove = enemy.GetComponent<MonsterMove>();
-        monsterMove.OnDamaged();// 가시도 enemy 태그이기 때문에 위에서 밟으면 오류 발생, 나중에 만들 땐 가시같은 함정은 태그를 따로 설정할 필요 있음
+        // 가시도 enemy 태그이기 때문에 위에서 밟으면 오류 발생, 나중에 만들 땐 가시같은 함정은 태그를 따로 설정할 필요 있음
     }
     
     public void OnDamaged(Vector2 targetPos)

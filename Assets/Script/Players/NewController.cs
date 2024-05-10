@@ -10,37 +10,31 @@ public class NewController : MonoBehaviour
 {
     private Animator animator;
     private Rigidbody2D rigid;
+    private SkeletonAnimation mySkeleton;
 
-    [SerializeField]
+    private float damage = 5f;
     private float speed = 4f;
-    [SerializeField]
     private float walkSpeed = 4f;
-    [SerializeField]
     private float runSpeed = 8f;
-    [SerializeField]
     private float dashSpeed = 16f;
-    [SerializeField]
     private float jumpForce = 400;
-    [SerializeField]
     private float wallJmpForce = 400;
-    [SerializeField]
     private int jumpCount = 0;
-    [SerializeField]
     private float isRight = -1;
-    [SerializeField]
+
     bool isWalk = false;
-    [SerializeField]
     bool isRun = false;
-    [SerializeField]
     bool isDash = false;
-    [SerializeField]
     bool isJump = false;
-    [SerializeField]
     bool isDrop = false;
     bool isHang = false;
+    bool isAttack = false;
     bool isWallJmp = false;
-    [SerializeField]
     bool isWall = false;
+
+    bool canDmg = false;
+    bool canMove = true;
+    bool canDamaged = true;
 
     private float wallChkDis = 0.15f;
     public Transform wallChk;
@@ -48,7 +42,7 @@ public class NewController : MonoBehaviour
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset[] AnimClip;
 
-    List<KeyCode> keys = new List<KeyCode>() { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.Space, KeyCode.X, KeyCode.LeftShift};
+    List<KeyCode> keys = new List<KeyCode>() { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.Space, KeyCode.X, KeyCode.LeftShift, KeyCode.Z };
 
     public enum State
     {
@@ -58,7 +52,8 @@ public class NewController : MonoBehaviour
         DASH,
         JUMP,
         DROP,
-        HANG
+        HANG,
+        ATTACK
     }
 
     public State playerState;
@@ -68,6 +63,7 @@ public class NewController : MonoBehaviour
     {
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
+        mySkeleton = GetComponent<SkeletonAnimation>();
     }
 
     private void Awake()
@@ -79,7 +75,7 @@ public class NewController : MonoBehaviour
 
     private void Update()
     {
-        switch(playerState)
+        switch (playerState)
         {
             case State.IDLE:
                 break;
@@ -128,6 +124,12 @@ public class NewController : MonoBehaviour
                     setCurrentState(State.IDLE);
                 }
                 break;
+            case State.ATTACK:
+                if (!isAttack)
+                {
+                    setCurrentState(State.IDLE);
+                }
+                break;
         }
 
         if (rigid.velocity.y < 0)
@@ -164,7 +166,7 @@ public class NewController : MonoBehaviour
         switch (state)
         {
             case State.IDLE:
-                rigid.velocity = Vector3.zero;
+                rigid.velocity = new Vector2(0, rigid.velocity.y);
                 playerState = State.IDLE;
                 AscnAnimation(AnimClip[(int)state], true, 1f);
                 break;
@@ -177,15 +179,16 @@ public class NewController : MonoBehaviour
                 AscnAnimation(AnimClip[(int)state], true, 2f);
                 break;
             case State.DASH:
-                isDash = true;
                 playerState = State.DASH;
                 AscnAnimation(AnimClip[(int)state], true, 3f);
+                Invoke("stopCounter", 0.2f);
                 break;
             case State.JUMP:
                 playerState = State.JUMP;
                 AscnAnimation(AnimClip[(int)state], false, 1f);
                 break;
             case State.DROP:
+                isDrop = true;
                 playerState = State.DROP;
                 AscnAnimation(AnimClip[(int)state], false, 1f);
                 break;
@@ -194,25 +197,30 @@ public class NewController : MonoBehaviour
                 playerState = State.HANG;
                 AscnAnimation(AnimClip[(int)state], true, 1f);
                 break;
+            case State.ATTACK:
+                isAttack = true;
+                playerState = State.ATTACK;
+                rigid.velocity = new Vector2(0,rigid.velocity.y);
+                AscnAnimation(AnimClip[(int)state], false, 2f);
+                Invoke("CanDmg", 0.2f);
+                Invoke("stopCounter", 0.3f);
+                break;
         }
     }
-    void stopCounter()
-    {
-        isDash = false;
-        rigid.velocity = new Vector2(0, rigid.velocity.y);
-    }
+
     void OnKeyboard(KeyCode key)
     {
+        if (!canMove)
+            return;
+
         if (keys.Contains(key))
         {
-            
-
-            if(key == KeyCode.LeftShift)
+            if (key == KeyCode.LeftShift)
             {
                 isRun = !isRun;
             }
 
-            if(playerState != State.JUMP)
+            if (playerState != State.JUMP)
             {
                 if (key == KeyCode.Space)
                 {
@@ -220,18 +228,23 @@ public class NewController : MonoBehaviour
                 }
                 else if (isHang)
                     return;
-            }
-
-            if (playerState != State.DASH)
-            {
-                if (key == KeyCode.X)
+                else if(playerState != State.DROP)
                 {
-                    isDash = true;
-                    Invoke("stopCounter", 0.2f);
-                }
-                else if (key != KeyCode.X)
-                {
-                    isWalk = true;
+                    if (playerState != State.ATTACK)
+                    {
+                        if (key == KeyCode.Z)
+                        {
+                            setCurrentState(State.ATTACK);
+                            return;
+                        }
+                        else if (playerState != State.DASH)
+                        {
+                            if (key != KeyCode.X)
+                            {
+                                isWalk = true;
+                            }
+                        }
+                    }
                 }
             }
             Move(key);
@@ -240,17 +253,18 @@ public class NewController : MonoBehaviour
 
     void Move(KeyCode key)
     {
-        if (isWallJmp)
+        if (isWallJmp || isDash || isAttack)
             return;
+
+        
         if (isJump)
         {
             setCurrentState(State.JUMP);
 
-            if (isDash)
+            if (key == KeyCode.X)
             {
-                if (key != KeyCode.None)
-                    return;
-                speed = dashSpeed;
+                isDash = true;
+                rigid.velocity = new Vector2(isRight * dashSpeed, rigid.velocity.y);
                 setCurrentState(State.DASH);
             }
             else if (isRun)
@@ -266,11 +280,10 @@ public class NewController : MonoBehaviour
         {
             setCurrentState(State.DROP);
 
-            if (isDash)
+            if (key == KeyCode.X)
             {
-                if (key != KeyCode.None)
-                    return;
-                speed = dashSpeed;
+                isDash = true;
+                rigid.velocity = new Vector2(isRight * dashSpeed, rigid.velocity.y);
                 setCurrentState(State.DASH);
             }
             else if (isRun)
@@ -281,18 +294,18 @@ public class NewController : MonoBehaviour
             {
                 speed = walkSpeed;
             }
-
         }
         else
         {
-            if(rigid.velocity.x == 0)
+            if (key == KeyCode.X)
+            {
+                isDash = true;
+                rigid.velocity = new Vector2(isRight * dashSpeed, rigid.velocity.y);
+                setCurrentState(State.DASH);
+            }
+            else if (rigid.velocity.x == 0)
             {
                 setCurrentState(State.IDLE);
-            }
-            else if (isDash)
-            {
-                speed = dashSpeed;
-                setCurrentState(State.DASH);
             }
             else if (isRun)
             {
@@ -305,6 +318,7 @@ public class NewController : MonoBehaviour
                 setCurrentState(State.WALK);
             }
         }
+        
 
         if (key == KeyCode.Space)
         {
@@ -327,35 +341,84 @@ public class NewController : MonoBehaviour
         {
             if (isRight == 1)
                 Flip();
+
             rigid.velocity = new Vector2(speed * -1, rigid.velocity.y);
         }
         else if (key == KeyCode.RightArrow)
         {
             if (isRight != 1)
                 Flip();
+
             rigid.velocity = new Vector2(speed, rigid.velocity.y);
         }
     }
-
     private void Flip()
     {
         transform.eulerAngles = new Vector3(0, Mathf.Abs(transform.eulerAngles.y - 180), 0);
         isRight = isRight * -1;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        if (collision.contacts[0].normal.y > 0.7f)
+        if (col.contacts[0].normal.y > 0.7f)
         {
             isDrop = false;
             jumpCount = 0;
         }
     }
 
-    private void OnDrawGizmos()
+    private void CanDmg()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(wallChk.position, Vector2.right * isRight * wallChkDis);
+        canDmg = true;
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if(col != null)
+        {
+            if (col.CompareTag("Enemy") && canDmg)
+            {
+                col.gameObject.GetComponent<MonsterMove>().OnDamaged();
+                col.gameObject.GetComponent<LivingEntity>().HealthDown(damage);
+                canDmg = false;
+            }
+        }
+    }
+
+    public void OnDamaged(Vector2 targetPos)
+    {
+        if (!canDamaged)
+            return;
+
+        mySkeleton.skeleton.SetColor(Color.red);
+        canDamaged = false;
+        canMove = false;
+
+        float dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
+        if (dirc == isRight)
+            Flip();
+
+        rigid.velocity = Vector2.zero;
+        rigid.AddForce(new Vector2(dirc, 0.5f) * 4, ForceMode2D.Impulse);
+        setCurrentState(State.DROP);
+
+        Invoke("Regain", 0.1f);
+        Invoke("CanMove", 0.5f);
+        Invoke("OffDamaged", 2);
+    }
+
+    private void Regain()
+    {
+        mySkeleton.skeleton.SetColor(Color.white);
+    }
+    private void CanMove()
+    {
+        canMove = true;
+    }
+    private void OffDamaged()
+    {
+        meshRenderer.material.color = new Color(1, 1, 1, 1f);
+        canDamaged = true;
     }
 
     private void FreezeX()
@@ -363,49 +426,11 @@ public class NewController : MonoBehaviour
         isWallJmp = false;
         isHang = false;
     }
-
-    /*
-    private void stateChange(State state)
+    void stopCounter()
     {
-        switch(state)
-        {
-            case State.IDLE:
-                playerState = State.IDLE;
-                speed = 0f;
-                animator.SetInteger("state", 0);
-                break;
-            case State.WALK:
-                playerState = State.WALK;
-                speed = walkSpeed;
-                animator.SetInteger("state", 1);
-                isWalk = true;
-                break;
-            case State.RUN:
-                playerState = State.RUN;
-                speed = runSpeed;
-                animator.SetInteger("state", 2);
-                isRun = true;
-                break;
-            case State.JUMP:
-                playerState = State.JUMP;
-                animator.SetInteger("state", 3);
-                break;
-            case State.DROP:
-                playerState = State.DROP;
-                animator.SetInteger("state", 4);
-                isDrop = true;
-                break;
-            case State.DASH:
-                playerState = State.DASH;
-                animator.SetInteger("state", 5);
-                isDash = true;
-                Invoke("stopCounter", 0.2f);
-                break;
-            case State.HANG:
-                playerState = State.HANG;
-                animator.SetInteger("state", 6);
-                break;
-        }
+        isAttack = false;
+        isDash = false;
+        canDmg = false;
+        setCurrentState(State.IDLE);
     }
-    */
 }
