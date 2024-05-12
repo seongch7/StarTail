@@ -14,6 +14,10 @@ public class NewController : MonoBehaviour
     private GameObject currentOneWayPlatform;
     [SerializeField]
     private CapsuleCollider2D playerCollider;
+    [SerializeField]
+    private CircleCollider2D objectCollider;
+    [SerializeField]
+    private CapsuleCollider2D attackCollider;
 
     private float damage = 5f;
     private float speed = 4f;
@@ -24,11 +28,13 @@ public class NewController : MonoBehaviour
     private float wallJmpForce = 400;
     private int jumpCount = 0;
     private float isRight = -1;
-
+    [SerializeField]
     bool isWalk = false;
     bool isRun = false;
     bool isDash = false;
+    [SerializeField]
     bool isJump = false;
+    [SerializeField]
     bool isDrop = false;
     bool isHang = false;
     bool isAttack = false;
@@ -72,6 +78,8 @@ public class NewController : MonoBehaviour
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
         mySkeleton = GetComponent<SkeletonAnimation>();
+        Physics2D.IgnoreCollision(playerCollider, objectCollider);
+        attackCollider.enabled = false;
     }
 
     private void Awake()
@@ -378,7 +386,7 @@ public class NewController : MonoBehaviour
     }
     
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionStay2D(Collision2D col)
     {
         if (col.contacts[0].normal.y > 0.7f)
         {
@@ -400,6 +408,7 @@ public class NewController : MonoBehaviour
             {
                 col.gameObject.GetComponent<MonsterMove>().OnDamaged();
                 col.gameObject.GetComponent<LivingEntity>().HealthDown(damage);
+                attackCollider.enabled = false;
                 canDmg = false;
             }
         }
@@ -454,6 +463,7 @@ public class NewController : MonoBehaviour
     }
     private void CanDmg()
     {
+        attackCollider.enabled = true;
         canDmg = true;
     }
     private void OffDamaged()
