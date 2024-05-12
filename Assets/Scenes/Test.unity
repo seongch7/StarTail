@@ -3790,7 +3790,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &292675065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3931,18 +3931,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676e74ab74bfe9e4daa4ef8877911313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 20
-  damage: 1
-  nextMove: 0
-  isRight: -1
-  dirc: 0
-  dis: 0
-  isGround: 1
   groundChk: {fileID: 1278918601}
   g_Layer:
     serializedVersion: 2
     m_Bits: 2048
-  groundChkDis: 0.5
 --- !u!50 &292675071
 Rigidbody2D:
   serializedVersion: 4
@@ -3982,7 +3974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74090594159bd124e955e210d9fd791b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownHp: 20
+  ownHp: 1000
 --- !u!61 &292675075
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4015,7 +4007,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.9363601, y: 0.705896}
+  m_Offset: {x: 0.2719326, y: 0.9798191}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4026,7 +4018,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.16625, y: 2.3955998}
+  m_Size: {x: 4.7, y: 2.9433618}
   m_EdgeRadius: 0
 --- !u!1 &295467957
 GameObject:
@@ -5245,9 +5237,9 @@ GameObject:
   - component: {fileID: 475217977}
   - component: {fileID: 475217976}
   - component: {fileID: 475217979}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Square (1)
-  m_TagString: Untagged
+  m_TagString: OneWayPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6058,8 +6050,8 @@ Transform:
   m_GameObject: {fileID: 566118614}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.46, y: -6.3619, z: 8.45}
-  m_LocalScale: {x: 9.2816, y: 1.0361407, z: 1}
+  m_LocalPosition: {x: 4.46, y: -6.3552, z: 8.45}
+  m_LocalScale: {x: 9.2816, y: 1.0496105, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 492097258}
@@ -10143,18 +10135,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676e74ab74bfe9e4daa4ef8877911313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 20
-  damage: 1
-  nextMove: 0
-  isRight: 1
-  dirc: 0
-  dis: 0
-  isGround: 1
   groundChk: {fileID: 0}
   g_Layer:
     serializedVersion: 2
     m_Bits: 0
-  groundChkDis: 0
 --- !u!50 &1140892514
 Rigidbody2D:
   serializedVersion: 4
@@ -10890,25 +10874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ed1d1ddc8784f44a62471f3cc90d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 3
-  damage: 5
-  speed: 0
-  atkSpeed: 2
-  walkSpeed: 4
-  runSpeed: 8
-  dashSpeed: 16
-  jumpForce: 400
-  wallJmpForce: 400
-  jumpCount: 0
-  isRight: 1
-  isWalk: 0
-  isRun: 0
-  isDash: 0
-  isJump: 0
-  isDrop: 0
-  isAttack: 0
-  isWall: 0
-  canDmg: 0
+  playerCollider: {fileID: 0}
   wallChk: {fileID: 0}
   w_Layer:
     serializedVersion: 2
@@ -13543,25 +13509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ed1d1ddc8784f44a62471f3cc90d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 3
-  damage: 5
-  speed: 4
-  atkSpeed: 2
-  walkSpeed: 4
-  runSpeed: 8
-  dashSpeed: 16
-  jumpForce: 400
-  wallJmpForce: 10
-  jumpCount: 0
-  isRight: -1
-  isWalk: 0
-  isRun: 0
-  isDash: 0
-  isJump: 0
-  isDrop: 0
-  isAttack: 0
-  isWall: 0
-  canDmg: 0
+  playerCollider: {fileID: 0}
   wallChk: {fileID: 19087117}
   w_Layer:
     serializedVersion: 2
@@ -14727,8 +14675,8 @@ GameObject:
   - component: {fileID: 1723664514}
   - component: {fileID: 1723664517}
   - component: {fileID: 1723664519}
-  - component: {fileID: 1723664520}
   - component: {fileID: 1723664521}
+  - component: {fileID: 1723664522}
   m_Layer: 7
   m_Name: "\uB85C\uD0C05"
   m_TagString: Player
@@ -14748,25 +14696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ed1d1ddc8784f44a62471f3cc90d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 3
-  damage: 5
-  speed: 4
-  atkSpeed: 2
-  walkSpeed: 4
-  runSpeed: 8
-  dashSpeed: 16
-  jumpForce: 400
-  wallJmpForce: 10
-  jumpCount: 0
-  isRight: -1
-  isWalk: 0
-  isRun: 0
-  isDash: 0
-  isJump: 0
-  isDrop: 0
-  isAttack: 0
-  isWall: 0
-  canDmg: 0
+  playerCollider: {fileID: 1723664519}
   wallChk: {fileID: 1545447824}
   w_Layer:
     serializedVersion: 2
@@ -14970,7 +14900,20 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0536142, y: 0.8053082}
   m_Size: {x: 0.96170104, y: 1.6486757}
   m_Direction: 0
---- !u!70 &1723664520
+--- !u!114 &1723664521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723664508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74090594159bd124e955e210d9fd791b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ownHp: 50000
+--- !u!70 &1723664522
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15002,22 +14945,9 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.47414267, y: 0.90046746}
-  m_Size: {x: 1.7446527, y: 1.8433548}
+  m_Offset: {x: -0.61025655, y: 0.9501978}
+  m_Size: {x: 2.1234272, y: 2.1234272}
   m_Direction: 0
---- !u!114 &1723664521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723664508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74090594159bd124e955e210d9fd791b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ownHp: 50000
 --- !u!114 &1733506985
 MonoBehaviour:
   m_ObjectHideFlags: 0

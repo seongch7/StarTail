@@ -11,6 +11,9 @@ public class NewController : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rigid;
     private SkeletonAnimation mySkeleton;
+    private GameObject currentOneWayPlatform;
+    [SerializeField]
+    private CapsuleCollider2D playerCollider;
 
     private float damage = 5f;
     private float speed = 4f;
@@ -35,6 +38,9 @@ public class NewController : MonoBehaviour
     bool canDmg = false;
     bool canMove = true;
     bool canDamaged = true;
+    [SerializeField]
+    bool down = false;
+    bool coolTime = true;
 
     private float wallChkDis = 0.15f;
     public Transform wallChk;
@@ -42,7 +48,9 @@ public class NewController : MonoBehaviour
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset[] AnimClip;
 
-    List<KeyCode> keys = new List<KeyCode>() { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.Space, KeyCode.X, KeyCode.LeftShift, KeyCode.Z };
+    List<KeyCode> keys = new List<KeyCode>()
+    { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.DownArrow,
+        KeyCode.Space, KeyCode.X, KeyCode.LeftShift, KeyCode.Z };
 
     public enum State
     {
@@ -179,9 +187,11 @@ public class NewController : MonoBehaviour
                 AscnAnimation(AnimClip[(int)state], true, 2f);
                 break;
             case State.DASH:
+                coolTime = false;
                 playerState = State.DASH;
                 AscnAnimation(AnimClip[(int)state], true, 3f);
                 Invoke("stopCounter", 0.2f);
+                Invoke("CoolDown", 1.2f);
                 break;
             case State.JUMP:
                 playerState = State.JUMP;
@@ -212,9 +222,13 @@ public class NewController : MonoBehaviour
     {
         if (!canMove)
             return;
-
+        
         if (keys.Contains(key))
         {
+            if(key == KeyCode.DownArrow)
+            {
+                down = !down;
+            }
             if (key == KeyCode.LeftShift)
             {
                 isRun = !isRun;
@@ -222,6 +236,15 @@ public class NewController : MonoBehaviour
 
             if (playerState != State.JUMP)
             {
+                if (key == KeyCode.Space && down)
+                {
+                    if (currentOneWayPlatform != null)
+                    {
+                        StartCoroutine(DisableCollision());
+                        setCurrentState(State.DROP);
+                        return;
+                    }
+                }
                 if (key == KeyCode.Space)
                 {
                     isJump = true;
@@ -261,7 +284,7 @@ public class NewController : MonoBehaviour
         {
             setCurrentState(State.JUMP);
 
-            if (key == KeyCode.X)
+            if (key == KeyCode.X && coolTime)
             {
                 isDash = true;
                 rigid.velocity = new Vector2(isRight * dashSpeed, rigid.velocity.y);
@@ -280,7 +303,7 @@ public class NewController : MonoBehaviour
         {
             setCurrentState(State.DROP);
 
-            if (key == KeyCode.X)
+            if (key == KeyCode.X && coolTime)
             {
                 isDash = true;
                 rigid.velocity = new Vector2(isRight * dashSpeed, rigid.velocity.y);
@@ -297,7 +320,7 @@ public class NewController : MonoBehaviour
         }
         else
         {
-            if (key == KeyCode.X)
+            if (key == KeyCode.X && coolTime)
             {
                 isDash = true;
                 rigid.velocity = new Vector2(isRight * dashSpeed, rigid.velocity.y);
@@ -322,6 +345,7 @@ public class NewController : MonoBehaviour
 
         if (key == KeyCode.Space)
         {
+            
             if (isHang)
             {
                 isWallJmp = true;
@@ -352,11 +376,7 @@ public class NewController : MonoBehaviour
             rigid.velocity = new Vector2(speed, rigid.velocity.y);
         }
     }
-    private void Flip()
-    {
-        transform.eulerAngles = new Vector3(0, Mathf.Abs(transform.eulerAngles.y - 180), 0);
-        isRight = isRight * -1;
-    }
+    
 
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -365,11 +385,11 @@ public class NewController : MonoBehaviour
             isDrop = false;
             jumpCount = 0;
         }
-    }
 
-    private void CanDmg()
-    {
-        canDmg = true;
+        if (col.gameObject.CompareTag("OneWayPlatform"))
+        {
+            currentOneWayPlatform = col.gameObject;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D col)
@@ -385,6 +405,23 @@ public class NewController : MonoBehaviour
         }
     }
 
+    private void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.CompareTag("OneWayPlatform"))
+        {
+            currentOneWayPlatform = null;
+        }
+    }
+
+    private IEnumerator DisableCollision()
+    {
+        BoxCollider2D platformCollider = currentOneWayPlatform.GetComponent<BoxCollider2D>();
+
+        Physics2D.IgnoreCollision(playerCollider, platformCollider);
+        yield return new WaitForSeconds(2f);
+        Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
+
+    }
     public void OnDamaged(Vector2 targetPos)
     {
         if (!canDamaged)
@@ -415,16 +452,23 @@ public class NewController : MonoBehaviour
     {
         canMove = true;
     }
+    private void CanDmg()
+    {
+        canDmg = true;
+    }
     private void OffDamaged()
     {
-        meshRenderer.material.color = new Color(1, 1, 1, 1f);
         canDamaged = true;
     }
-
     private void FreezeX()
     {
         isWallJmp = false;
         isHang = false;
+    }
+    private void Flip()
+    {
+        transform.eulerAngles = new Vector3(0, Mathf.Abs(transform.eulerAngles.y - 180), 0);
+        isRight = isRight * -1;
     }
     void stopCounter()
     {
@@ -432,5 +476,10 @@ public class NewController : MonoBehaviour
         isDash = false;
         canDmg = false;
         setCurrentState(State.IDLE);
+    }
+
+    void CoolDown()
+    {
+        coolTime = true;
     }
 }

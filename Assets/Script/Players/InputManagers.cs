@@ -21,6 +21,16 @@ public class InputManager : MonoBehaviour
                 KeyAction.Invoke(KeyCode.LeftArrow);
             }
 
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                KeyAction.Invoke(KeyCode.DownArrow);
+            }
+
+            if (Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                KeyAction.Invoke(KeyCode.DownArrow);
+            }
+
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
                 KeyAction.Invoke(KeyCode.LeftShift);
