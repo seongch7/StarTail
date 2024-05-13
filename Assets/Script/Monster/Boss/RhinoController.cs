@@ -38,14 +38,12 @@ public class RhinoController : MonoBehaviour
     private void Awake()
     {
         rig = GetComponent<Rigidbody2D>();
+
+        Flip();
         SetCurrentAnimation(AnimState.IDLE);
 
         duration = skeletonAnimation.skeleton.Data.FindAnimation(skeletonAnimation.AnimationName).Duration;
         StartCoroutine(AnimStart(duration));
-    }
-
-    void Update()
-    {
     }
 
     private IEnumerator AnimStart(float duration) 
@@ -67,6 +65,7 @@ public class RhinoController : MonoBehaviour
             _AnimState = AnimState.IDLE;
         }
 
+        Flip();
         SetCurrentAnimation(_AnimState);
 
         duration = skeletonAnimation.skeleton.Data.FindAnimation(skeletonAnimation.AnimationName).Duration;
@@ -110,6 +109,20 @@ public class RhinoController : MonoBehaviour
             case AnimState.ATT_UPPERCUT:
                 _AsncAnimation(AnimClip[(int)_state], true, 1f);
                 break;
+        }
+    }
+
+    private void Flip()
+    {
+        bool dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? true : false;
+
+        if (dir)
+        {
+            gameObject.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
+        else
+        {
+            gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
     }
 }
