@@ -8,6 +8,7 @@ public class RhinoController : MonoBehaviour
     //스파인 애니메이션 관련
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset[] AnimClip;
+    public Spine.TrackEntry trackItemNow;
 
     //애니메이션 enum
     public enum AnimState
@@ -32,17 +33,29 @@ public class RhinoController : MonoBehaviour
     public GameObject player;
 
     float distance;
+    float duration;
 
     private void Awake()
     {
         rig = GetComponent<Rigidbody2D>();
+        SetCurrentAnimation(AnimState.IDLE);
+
+        duration = skeletonAnimation.skeleton.Data.FindAnimation(skeletonAnimation.AnimationName).Duration;
+        StartCoroutine(AnimStart(duration));
     }
 
     void Update()
     {
+    }
+
+    private IEnumerator AnimStart(float duration) 
+    {
+        yield return new WaitForSeconds(duration - 0.1f);
+
         distance = (player.transform.position.x - gameObject.transform.position.x > 0) ? player.transform.position.x - gameObject.transform.position.x : gameObject.transform.position.x - player.transform.position.x;
 
-        if (distance < 4f) {
+        if (distance < 4f)
+        {
             _AnimState = AnimState.ATT_UPPERCUT;
         }
         else if (distance < 10f)
@@ -56,6 +69,9 @@ public class RhinoController : MonoBehaviour
 
         SetCurrentAnimation(_AnimState);
 
+        duration = skeletonAnimation.skeleton.Data.FindAnimation(skeletonAnimation.AnimationName).Duration;
+        StartCoroutine(AnimStart(duration));
+
     }
     private void _AsncAnimation(AnimationReferenceAsset animClip, bool loop, float timeScale)
     {
@@ -63,10 +79,19 @@ public class RhinoController : MonoBehaviour
         if (animClip.name.Equals(CurrentAnimation))
             return;
 
-        //해당 애니메이션으로 변경
-        skeletonAnimation.state.SetAnimation(0, animClip, loop).TimeScale = timeScale;
-        skeletonAnimation.loop = loop;
-        skeletonAnimation.timeScale = timeScale;
+        if (loop)
+        {
+            //해당 애니메이션으로 변경
+            skeletonAnimation.state.SetAnimation(0, animClip, loop);
+        }
+        else
+        {
+            //해당 애니메이션으로 변경
+            skeletonAnimation.state.SetAnimation(0, animClip, loop);
+
+            skeletonAnimation.state.AddAnimation(0, AnimClip[0], true,0);
+
+        }
 
         //현재 재생되고 있는 애니메이션 값 변경
         CurrentAnimation = animClip.name;
@@ -82,10 +107,9 @@ public class RhinoController : MonoBehaviour
             case AnimState.ATT_JUMP:
                 _AsncAnimation(AnimClip[(int)_state], true, 1f);
                 break;
+            case AnimState.ATT_UPPERCUT:
+                _AsncAnimation(AnimClip[(int)_state], true, 1f);
+                break;
         }
-    }
-    public void Jump()
-    {
-
     }
 }
