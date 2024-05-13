@@ -41,13 +41,17 @@ public class RhinoController : MonoBehaviour
     private float distance;
     private float duration;
 
+    private bool _isWall = false;
+
     private void Awake()
     {
         //초기 선언
         rig = GetComponent<Rigidbody2D>();
         meshRenderer = GetComponent<MeshRenderer>();
+
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         
+        //공격 관련
         jumpAttack = transform.Find("JumpAttack").gameObject;
         upperAttack = transform.Find("UpperAttack").gameObject;
 
@@ -63,6 +67,18 @@ public class RhinoController : MonoBehaviour
         StartCoroutine(AnimStart(duration));
     }
 
+    private void Update()
+    {
+        if(player.transform.position.x >= 9 || player.transform.position.x<= -9)
+        {
+            _isWall = true;
+        }
+        else
+        {
+            _isWall = false;
+        }
+
+    }
 
     private IEnumerator AnimStart(float duration)
     {
@@ -87,6 +103,7 @@ public class RhinoController : MonoBehaviour
         SetCurrentAnimation(_AnimState);
         Flip();
 
+        //공격 콜라이더
         switch (CurrentAnimation)
         {
             case "ATT_JUMP":
@@ -102,7 +119,6 @@ public class RhinoController : MonoBehaviour
         StartCoroutine(AnimStart(duration));
 
         yield break;
-
     }
     private void _AsncAnimation(AnimationReferenceAsset animClip, bool loop, float timeScale)
     {
@@ -157,16 +173,21 @@ public class RhinoController : MonoBehaviour
         //점프 시작
         yield return new WaitForSeconds(1.43f);
 
+
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+
         float dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
 
         rig.velocity = new Vector2(6 * dir, 0);
 
+        collider.enabled = false;
         //점프 착지
         yield return new WaitForSeconds(0.77f);
 
         rig.velocity = new Vector2(0, 0);
         jumpAttack.SetActive(true);
 
+        collider.enabled = true;
         //공격 판정 0.2초
         yield return new WaitForSeconds(0.2f);
 

@@ -310,8 +310,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.1893, y: -2.63355, z: 0}
-    m_Extent: {x: 1.2040999, y: 3.23585, z: 0}
+    m_Center: {x: -0.18940002, y: -2.633, z: 0}
+    m_Extent: {x: 1.2042999, y: 3.2357001, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -890,8 +890,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.18980002, y: -2.63285, z: 0}
-    m_Extent: {x: 1.2047, y: 3.23535, z: 0}
+    m_Center: {x: -0.18974996, y: -2.6329, z: 0}
+    m_Extent: {x: 1.20435, y: 3.2359002, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1443,8 +1443,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.19014996, y: -2.6335502, z: 0}
-    m_Extent: {x: 1.2033501, y: 3.23565, z: 0}
+    m_Center: {x: -0.18915004, y: -2.6335, z: 0}
+    m_Extent: {x: 1.20415, y: 3.2350001, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1679,9 +1679,10 @@ GameObject:
   m_Component:
   - component: {fileID: 371694428}
   - component: {fileID: 371694429}
+  - component: {fileID: 371694430}
   m_Layer: 6
   m_Name: JumpAttack
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1720,10 +1721,10 @@ BoxCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -1746,6 +1747,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 29.66255, y: 17.911776}
   m_EdgeRadius: 0
+--- !u!114 &371694430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371694427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91af319069edddb40bd487b31cbb688f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  isEnemy: 1
 --- !u!1 &389069691
 GameObject:
   m_ObjectHideFlags: 0
@@ -2378,8 +2393,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 65.07259, y: 2.596403, z: 0.19999999}
-  m_Center: {x: 0, y: -15.2718, z: 0}
+  m_Size: {x: 65.07259, y: 2.1054187, z: 0.19999999}
+  m_Center: {x: 0, y: -15.517295, z: 0}
 --- !u!1 &584341031
 GameObject:
   m_ObjectHideFlags: 0
@@ -2847,12 +2862,12 @@ GameObject:
   - component: {fileID: 659204220}
   - component: {fileID: 659204219}
   - component: {fileID: 659204218}
+  - component: {fileID: 659204223}
   - component: {fileID: 659204217}
   - component: {fileID: 659204216}
-  - component: {fileID: 659204223}
   m_Layer: 6
   m_Name: Rhino
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2879,7 +2894,7 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -2914,17 +2929,17 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -3070,6 +3085,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ownHp: 10000
+  hp: 0
 --- !u!1 &686288875
 GameObject:
   m_ObjectHideFlags: 0
@@ -3507,8 +3523,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.021049976, y: 0.4738, z: 0}
-    m_Extent: {x: 1.78415, y: 1.1331999, z: 0}
+    m_Center: {x: 0.021499991, y: 0.47275004, z: 0}
+    m_Extent: {x: 1.7833, y: 1.13385, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4603,8 +4619,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.19, y: -2.63315, z: 0}
-    m_Extent: {x: 1.204, y: 3.23555, z: 0}
+    m_Center: {x: -0.19009995, y: -2.6327999, z: 0}
+    m_Extent: {x: 1.2041, y: 3.2358, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5830,8 +5846,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.19044995, y: -2.63335, z: 0}
-    m_Extent: {x: 1.20365, y: 3.23565, z: 0}
+    m_Center: {x: -0.19024998, y: -2.6329, z: 0}
+    m_Extent: {x: 1.2039499, y: 3.2355, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -5914,8 +5930,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.021149993, y: 0.47324997, z: 0}
-    m_Extent: {x: 1.78325, y: 1.13275, z: 0}
+    m_Center: {x: 0.021400034, y: 0.47309998, z: 0}
+    m_Extent: {x: 1.7835, y: 1.1338, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -6674,9 +6690,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1710177246}
   - component: {fileID: 1710177247}
+  - component: {fileID: 1710177248}
   m_Layer: 6
   m_Name: UpperAttack
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6715,10 +6732,10 @@ BoxCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -6728,7 +6745,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -3.3021383, y: 8.863635}
+  m_Offset: {x: -4.228381, y: 8.863635}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6739,8 +6756,22 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 22.759352, y: 18.72727}
+  m_Size: {x: 24.611837, y: 18.72727}
   m_EdgeRadius: 0
+--- !u!114 &1710177248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710177245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91af319069edddb40bd487b31cbb688f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  isEnemy: 1
 --- !u!1 &1729773803
 GameObject:
   m_ObjectHideFlags: 0
@@ -8415,7 +8446,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74090594159bd124e955e210d9fd791b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ownHp: 50000
+  ownHp: 100
+  hp: 0
 --- !u!70 &2143119613
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -8484,7 +8516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCollider: {fileID: 2143119613}
   objectCollider: {fileID: 0}
-  attackCollider: {fileID: 0}
+  attackCollider: {fileID: 2143119611}
   isWalk: 0
   isJump: 0
   isDrop: 0
@@ -8626,7 +8658,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

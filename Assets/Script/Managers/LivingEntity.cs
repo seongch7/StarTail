@@ -6,7 +6,7 @@ using UnityEngine;
 public class LivingEntity : MonoBehaviour
 {
     public float ownHp;
-    protected float hp;
+    public float hp;
 
     void Start()
     {
