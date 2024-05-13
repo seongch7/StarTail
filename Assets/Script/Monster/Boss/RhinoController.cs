@@ -42,6 +42,7 @@ public class RhinoController : MonoBehaviour
 
     private float distance;
     private float duration;
+    private float dir;
 
     public bool _isWall = false;
 
@@ -63,6 +64,7 @@ public class RhinoController : MonoBehaviour
         _AnimState = AnimState.IDLE;
         CurrentAnimation = AnimClip[0].name;
         duration = 2.667f;
+        dir = -1;
 
         Flip();
         SetCurrentAnimation(_AnimState);
@@ -83,6 +85,12 @@ public class RhinoController : MonoBehaviour
         else
         {
             _isWall = false;
+
+            if (CurrentAnimation == "ATT_HEADING2")
+            {
+                dashAttack.SetActive(true);
+                rig.velocity = new Vector2(3 * dir, 0);
+            }
         }
 
     }
@@ -195,20 +203,16 @@ public class RhinoController : MonoBehaviour
         yield return new WaitForSeconds(1.43f);
 
 
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
-
-        float dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
+        dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
 
         rig.velocity = new Vector2(6 * dir, 0);
 
-        collider.enabled = false;
         //점프 착지
         yield return new WaitForSeconds(0.77f);
 
         rig.velocity = new Vector2(0, 0);
         jumpAttack.SetActive(true);
 
-        collider.enabled = true;
         //공격 판정 0.2초
         yield return new WaitForSeconds(0.2f);
 
@@ -233,7 +237,7 @@ public class RhinoController : MonoBehaviour
 
     private void DashAttackStart()
     {
-        float dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
+        dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
 
         dashAttack.SetActive(true);
         rig.velocity = new Vector2(3 * dir, 0);
@@ -254,18 +258,18 @@ public class RhinoController : MonoBehaviour
     }
     private IEnumerator Bounce()
     {
-        float dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
-        rig.velocity = new Vector2(6 * dir, 0);
-        //gravity로 자동으로 내려오게 해야함
+        rig.velocity = new Vector2(6 * -1 * dir, 5);
 
         skeletonAnimation.timeScale = 0;
 
-        yield return new WaitForSeconds(0.6f);
-        rig.velocity = new Vector2(0, 0);
+        yield return new WaitForSeconds(0.3f);
+        rig.velocity = new Vector2(6 * -1 * dir, 0);
 
+        yield return new WaitForSeconds(0.3f);
         skeletonAnimation.timeScale = 1;
 
         yield return new WaitForSeconds(1.30f);
+        rig.velocity = new Vector2(0,0);
         skeletonAnimation.timeScale = 0;
 
         yield return new WaitForSeconds(3f);
