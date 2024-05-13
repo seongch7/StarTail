@@ -10,8 +10,9 @@ public class RhinoController : MonoBehaviour
     {
         IDLE,
         ATT_UPPERCUT,
-        ATT_HEADING,
         ATT_JUMP,
+        ATT_HEADING2,
+        ATT_HEADING,
         CC_BOUNCE,
         CC_GROGGY
     }
@@ -32,6 +33,7 @@ public class RhinoController : MonoBehaviour
     //공격 콜라이더
     private GameObject jumpAttack;
     private GameObject upperAttack;
+    private GameObject dashAttack;
 
     [SerializeField]
     public GameObject player;
@@ -41,7 +43,7 @@ public class RhinoController : MonoBehaviour
     private float distance;
     private float duration;
 
-    private bool _isWall = false;
+    public bool _isWall = false;
 
     private void Awake()
     {
@@ -54,6 +56,7 @@ public class RhinoController : MonoBehaviour
         //공격 관련
         jumpAttack = transform.Find("JumpAttack").gameObject;
         upperAttack = transform.Find("UpperAttack").gameObject;
+        dashAttack = transform.Find("DashAttack").gameObject;
 
 
         //IDLE 애니메이션 실행
@@ -69,9 +72,13 @@ public class RhinoController : MonoBehaviour
 
     private void Update()
     {
-        if(player.transform.position.x >= 9 || player.transform.position.x<= -9)
+        if(transform.position.x >= 9 || transform.position.x<= -9)
         {
             _isWall = true;
+            if(CurrentAnimation == "ATT_HEADING2")
+            {
+                StartCoroutine(DashAttackEnd());
+            }
         }
         else
         {
@@ -84,26 +91,31 @@ public class RhinoController : MonoBehaviour
     {
 
         yield return new WaitForSeconds(duration);
-
+        
         distance = (player.transform.position.x - gameObject.transform.position.x > 0) ? player.transform.position.x - gameObject.transform.position.x : gameObject.transform.position.x - player.transform.position.x;
+        
+        if(CurrentAnimation == "CC_BOUNCE")
+        {
+            _AnimState = AnimState.IDLE;
 
-        if (distance < 3f)
+        }
+        else if (distance < 3f)
         {
             _AnimState = AnimState.ATT_UPPERCUT;
         }
-        else if (distance < 10f)
+        else if (distance < 8f)
         {
             _AnimState = AnimState.ATT_JUMP;
         }
         else
         {
-            _AnimState = AnimState.IDLE;
+            _AnimState = AnimState.ATT_HEADING2;
         }
 
         SetCurrentAnimation(_AnimState);
         Flip();
 
-        //공격 콜라이더
+        //공격 코루틴
         switch (CurrentAnimation)
         {
             case "ATT_JUMP":
@@ -112,6 +124,9 @@ public class RhinoController : MonoBehaviour
             case "ATT_UPPERCUT":
                 StartCoroutine(UpperAttack());
                 break;
+            case "ATT_HEADING2":
+                DashAttackStart();
+                yield break;
 
         }
 
@@ -147,8 +162,14 @@ public class RhinoController : MonoBehaviour
             case AnimState.ATT_UPPERCUT:
                 _AsncAnimation(AnimClip[(int)_state], true, 1f);
                 break;
-            case AnimState.ATT_HEADING:
+            case AnimState.ATT_HEADING2:
                 _AsncAnimation(AnimClip[(int)_state], true, 1f);
+                break;
+            case AnimState.ATT_HEADING:
+                _AsncAnimation(AnimClip[(int)_state], false, 1f);
+                break;
+            case AnimState.CC_BOUNCE:
+                _AsncAnimation(AnimClip[(int)_state], false, 1f);
                 break;
         }
     }
@@ -206,6 +227,51 @@ public class RhinoController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         upperAttack.SetActive(false);
+
+        yield break;
+    }
+
+    private void DashAttackStart()
+    {
+        float dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
+
+        dashAttack.SetActive(true);
+        rig.velocity = new Vector2(3 * dir, 0);
+
+    }
+    private IEnumerator DashAttackEnd()
+    {
+        rig.velocity = new Vector2(0, 0);
+
+        dashAttack.SetActive(false);
+
+        _AnimState = AnimState.CC_BOUNCE;
+        SetCurrentAnimation(_AnimState);
+
+        StartCoroutine(Bounce());
+
+        yield break;
+    }
+    private IEnumerator Bounce()
+    {
+        float dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
+        rig.velocity = new Vector2(6 * dir, 0);
+        //gravity로 자동으로 내려오게 해야함
+
+        skeletonAnimation.timeScale = 0;
+
+        yield return new WaitForSeconds(0.6f);
+        rig.velocity = new Vector2(0, 0);
+
+        skeletonAnimation.timeScale = 1;
+
+        yield return new WaitForSeconds(1.30f);
+        skeletonAnimation.timeScale = 0;
+
+        yield return new WaitForSeconds(3f);
+
+        skeletonAnimation.timeScale = 1;
+        StartCoroutine(AnimStart(0.1f));
 
         yield break;
     }

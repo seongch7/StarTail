@@ -1,227 +1,257 @@
 skeleton.png
-	size: 4036, 1784
+	size: 4376, 1648
 	filter: Linear, Linear
 몸통@3x
-	bounds: 1648, 910, 871, 694
+	bounds: 1767, 775, 871, 694
 	rotate: 90
 바지@3x
-	bounds: 2132, 174, 734, 675
+	bounds: 2251, 39, 734, 675
 	rotate: 90
 아래 턱, 입안@3x
-	bounds: 2809, 839, 362, 297
-얼굴@3x
-	bounds: 2787, 1138, 632, 643
-오른 검지@3x
-	bounds: 2809, 526, 311, 262
+	bounds: 2928, 639, 362, 297
 	rotate: 90
+얼굴@3x
+	bounds: 2906, 1003, 632, 643
+오른 검지@3x
+	bounds: 3227, 739, 311, 262
 오른 새끼@3x
-	bounds: 3823, 229, 209, 290
+	bounds: 4162, 881, 209, 290
 오른 엄지@3x
-	bounds: 3173, 871, 265, 218
+	bounds: 3878, 89, 265, 218
 	rotate: 90
 오른 윗팔@3x
-	bounds: 3421, 1143, 473, 638
-오른 중지@3x
-	bounds: 3073, 547, 290, 219
+	bounds: 3540, 1173, 473, 638
 	rotate: 90
+오른 중지@3x
+	bounds: 3878, 356, 290, 219
 오른다리@3x
-	bounds: 3375, 4, 446, 515
+	bounds: 3430, 60, 446, 515
 오른팔@3x
-	bounds: 2344, 1078, 441, 703
+	bounds: 2463, 943, 441, 703
 왼 검지@3x
-	bounds: 2132, 2, 236, 170
+	bounds: 4180, 1410, 236, 170
+	rotate: 90
 왼 새끼@3x
-	bounds: 1889, 2, 153, 157
+	bounds: 2463, 784, 153, 157
 왼 엄지@3x
-	bounds: 1648, 19, 140, 239
+	bounds: 3227, 597, 140, 239
 	rotate: 90
 왼 윗팔@3x
-	bounds: 3421, 521, 594, 620
-왼 중지@3x
-	bounds: 3823, 10, 198, 217
-왼다리@3x
-	bounds: 2809, 19, 500, 564
+	bounds: 3540, 577, 594, 620
 	rotate: 90
+왼 중지@3x
+	bounds: 4170, 662, 198, 217
+왼다리@3x
+	bounds: 2928, 11, 500, 564
 왼팔@3x
-	bounds: 1648, 161, 482, 747
+	bounds: 1767, 26, 482, 747
 코뿔소@3x
-	bounds: 2, 18, 1644, 1763
+	bounds: 2, 2, 1644, 1763
 	offsets: 83, 402, 1787, 2526
+	rotate: 90
 
 skeleton_2.png
-	size: 3820, 3288
-	filter: Linear, Linear
-Bounce Eff/3
-	bounds: 2576, 727, 2558, 1242
-	rotate: 90
-Bounce Eff/4
-	bounds: 2, 2089, 2572, 1196
-Bounce Eff/5
-	bounds: 2, 893, 2510, 1194
-Bounce Eff/6
-	bounds: 2, 2, 2311, 889
-
-skeleton_3.png
-	size: 3308, 1724
+	size: 5652, 3408
 	filter: Linear, Linear
 Bounce Eff/1
-	bounds: 2253, 199, 1522, 1053
+	bounds: 3640, 1881, 1522, 1053
 	rotate: 90
+Bounce Eff/3
+	bounds: 1200, 845, 2558, 1242
+	rotate: 90
+Bounce Eff/4
+	bounds: 2, 831, 2572, 1196
+	rotate: 90
+Bounce Eff/5
+	bounds: 2444, 893, 2510, 1194
+	rotate: 90
+Bounce Eff/6
+	bounds: 2444, 2, 2311, 889
 Bounce Eff/7
-	bounds: 2, 828, 2249, 893
+	bounds: 4757, 1154, 2249, 893
+	rotate: 90
 Bounce Eff/8
-	bounds: 2, 2, 2146, 824
+	bounds: 2, 5, 2146, 824
 
-skeleton_4.png
-	size: 4032, 3072
+skeleton_3.png
+	size: 5112, 2504
 	filter: Linear, Linear
 Heading Eff/D/2
-	bounds: 3874, 2468, 600, 111
-	rotate: 90
+	bounds: 3501, 2, 600, 111
 Heading Eff/D/3
-	bounds: 3874, 1888, 578, 156
-	rotate: 90
+	bounds: 1879, 526, 578, 156
 Heading Eff/D/4
-	bounds: 2, 2, 1993, 546
-Heading Eff/D/5
-	bounds: 1997, 86, 1875, 593
-Heading Eff/D/6
-	bounds: 2, 550, 2518, 957
+	bounds: 4561, 509, 1993, 546
 	rotate: 90
+Heading Eff/D/5
+	bounds: 2, 89, 1875, 593
+Heading Eff/D/6
+	bounds: 2, 1545, 2518, 957
 Heading Eff/D/7
-	bounds: 961, 581, 2487, 977
+	bounds: 2522, 15, 2487, 977
 	rotate: 90
 Heading Eff/D/8
-	bounds: 1940, 681, 2387, 1058
+	bounds: 3501, 115, 2387, 1058
 	rotate: 90
 Heading Eff/D/9
-	bounds: 3000, 1051, 2017, 859
-	rotate: 90
+	bounds: 2, 684, 2017, 859
 
-skeleton_5.png
-	size: 2404, 1972
+skeleton_4.png
+	size: 2840, 1776
 	filter: Linear, Linear
 Heading Eff/N/3
-	bounds: 1775, 4, 472, 571
-	rotate: 90
+	bounds: 2365, 1202, 472, 571
 Heading Eff/N/4
 	bounds: 2, 2, 1771, 1968
 	offsets: 0, 0, 1795, 1968
+	rotate: 90
 Heading Eff/N/5
-	bounds: 1775, 478, 626, 605
+	bounds: 1972, 281, 626, 605
 	offsets: 0, 0, 635, 605
 Heading Eff/N/6
-	bounds: 1775, 1085, 391, 885
+	bounds: 1972, 888, 391, 885
 
-skeleton_6.png
-	size: 4096, 4088
-	filter: Linear, Linear
-Idle Eff/10
-	bounds: 2, 1949, 1729, 2134
-Idle Eff/11
-	bounds: 1733, 2561, 1522, 2131
-	rotate: 90
-Idle Eff/19
-	bounds: 3866, 1992, 2091, 227
-	rotate: 90
-Idle Eff/20
-	bounds: 3850, 2, 1988, 236
-	rotate: 90
-Idle Eff/9
-	bounds: 1733, 873, 1686, 2115
-	rotate: 90
-
-skeleton_7.png
-	size: 4040, 4096
+skeleton_5.png
+	size: 5852, 5340
 	filter: Linear, Linear
 Idle Eff/1
-	bounds: 2973, 291, 1372, 539
-	rotate: 90
+	bounds: 1688, 546, 1372, 539
+Idle Eff/10
+	bounds: 2, 3204, 1729, 2134
+Idle Eff/11
+	bounds: 2, 1071, 1522, 2131
 Idle Eff/12
-	bounds: 221, 167, 448, 1951
-Idle Eff/16
-	bounds: 3514, 381, 1282, 248
+	bounds: 3878, 4671, 448, 1951
 	rotate: 90
-Idle Eff/17
-	bounds: 221, 2, 1277, 163
-Idle Eff/18
-	bounds: 2, 156, 1962, 217
-	rotate: 90
-Idle Eff/2
-	bounds: 2336, 94, 1569, 635
-	rotate: 90
-Idle Eff/3
-	bounds: 2336, 3550, 1702, 541
-Idle Eff/4
-	bounds: 1680, 2239, 1852, 548
-	rotate: 90
-Idle Eff/5
-	bounds: 2336, 2787, 1684, 761
-Idle Eff/6
-	bounds: 2336, 1665, 1578, 1120
-Idle Eff/7
-	bounds: 671, 202, 1663, 1916
-Idle Eff/8
-	bounds: 2, 2120, 1676, 1971
-
-skeleton_8.png
-	size: 2532, 1248
-	filter: Linear, Linear
 Idle Eff/13
-	bounds: 1580, 589, 656, 948
+	bounds: 4794, 115, 656, 948
 	rotate: 90
 Idle Eff/14
-	bounds: 391, 14, 81, 517
+	bounds: 5330, 1235, 81, 517
 	rotate: 90
 Idle Eff/15
-	bounds: 391, 97, 1148, 299
+	bounds: 3764, 1525, 1148, 299
+Idle Eff/16
+	bounds: 2, 58, 1282, 248
+Idle Eff/17
+	bounds: 1286, 143, 1277, 163
+Idle Eff/18
+	bounds: 3878, 5121, 1962, 217
+Idle Eff/19
+	bounds: 1733, 3247, 2091, 227
+	rotate: 90
+Idle Eff/2
+	bounds: 3764, 1826, 1569, 635
+Idle Eff/20
+	bounds: 1962, 3350, 1988, 236
 	rotate: 90
 Idle Eff/21
-	bounds: 1164, 51, 141, 566
+	bounds: 1962, 3207, 141, 566
 	rotate: 90
 Idle Eff/22
-	bounds: 2, 2, 1243, 387
-	rotate: 90
+	bounds: 2565, 2, 1243, 387
 Idle Eff/23
-	bounds: 692, 102, 1143, 470
+	bounds: 5335, 1318, 1143, 470
 	rotate: 90
 Idle Eff/24
-	bounds: 1164, 194, 1051, 414
+	bounds: 4914, 773, 1051, 414
 	rotate: 90
 Idle Eff/25
-	bounds: 1580, 230, 901, 357
+	bounds: 3810, 32, 901, 357
+Idle Eff/3
+	bounds: 3764, 2463, 1702, 541
+Idle Eff/4
+	bounds: 3214, 1513, 1852, 548
+	rotate: 90
+Idle Eff/5
+	bounds: 2, 308, 1684, 761
+Idle Eff/6
+	bounds: 3214, 391, 1578, 1120
+Idle Eff/7
+	bounds: 3878, 3006, 1663, 1916
+	rotate: 90
+Idle Eff/8
+	bounds: 2200, 3367, 1676, 1971
+Idle Eff/9
+	bounds: 1526, 1087, 1686, 2115
 
-skeleton_9.png
-	size: 4080, 2364
+skeleton_6.png
+	size: 4240, 2288
 	filter: Linear, Linear
 Jump Eff/10
-	bounds: 2573, 138, 703, 696
+	bounds: 3541, 1130, 703, 696
 	rotate: 90
 Jump Eff/11
-	bounds: 2573, 843, 1022, 603
+	bounds: 2936, 811, 1022, 603
+	rotate: 90
 Jump Eff/12
-	bounds: 2123, 382, 1064, 448
-	rotate: 90
+	bounds: 2936, 1835, 1064, 448
 Jump Eff/13
-	bounds: 1783, 229, 1217, 338
-	rotate: 90
+	bounds: 2699, 218, 1217, 338
 Jump Eff/14
-	bounds: 3843, 153, 1725, 235
+	bounds: 2699, 558, 1725, 235
 	rotate: 90
 Jump Eff/15
-	bounds: 1783, 1880, 2123, 482
+	bounds: 1783, 160, 2123, 482
+	rotate: 90
 Jump Eff/16
-	bounds: 613, 164, 2198, 617
+	bounds: 613, 85, 2198, 617
 	rotate: 90
 Jump Eff/17
-	bounds: 2, 105, 2257, 609
+	bounds: 2, 26, 2257, 609
 	rotate: 90
 Jump Eff/18
-	bounds: 1232, 167, 2195, 549
+	bounds: 1232, 88, 2195, 549
 	rotate: 90
 Jump Eff/19
-	bounds: 1783, 1448, 2058, 430
+	bounds: 2267, 225, 2058, 430
+	rotate: 90
 Jump Eff/20
-	bounds: 613, 6, 1752, 156
+	bounds: 1783, 2, 1752, 156
 Jump Eff/9
-	bounds: 3271, 2, 635, 149
+	bounds: 3541, 979, 635, 149
+
+skeleton_7.png
+	size: 5220, 5316
+	filter: Linear, Linear
+Uppercut Eff/10
+	bounds: 2, 2, 5089, 3851
+Uppercut Eff/9
+	bounds: 2, 3855, 5213, 1456
+
+skeleton_8.png
+	size: 5876, 5764
+	filter: Linear, Linear
+Uppercut Eff/11
+	bounds: 2, 2, 3580, 2673
+	rotate: 90
+Uppercut Eff/12
+	bounds: 3894, 2753, 3006, 1980
+	rotate: 90
+Uppercut Eff/13
+	bounds: 2677, 241, 2510, 2377
+	rotate: 90
+Uppercut Eff/8
+	bounds: 2, 3584, 3890, 2175
+
+skeleton_9.png
+	size: 4576, 2280
+	filter: Linear, Linear
+Uppercut Eff/14
+	bounds: 4015, 1002, 377, 612
+Uppercut Eff/15
+	bounds: 4015, 746, 515, 254
+Uppercut Eff/16
+	bounds: 2, 2, 734, 83
+Uppercut Eff/4
+	bounds: 4015, 1616, 659, 558
+	rotate: 90
+Uppercut Eff/5
+	bounds: 2864, 287, 1988, 1149
+	rotate: 90
+Uppercut Eff/6
+	bounds: 1616, 217, 2058, 1246
+	rotate: 90
+Uppercut Eff/7
+	bounds: 2, 87, 2188, 1612
+	rotate: 90
