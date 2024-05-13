@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class TriggerObject : MonoBehaviour
 {
-    CircleCollider2D collider;
     Rigidbody2D rigid;
+    [SerializeField]
+    private CapsuleCollider2D playerCollider;
+    [SerializeField]
+    private CircleCollider2D objectCollider;
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Physics2D.IgnoreCollision(playerCollider, objectCollider);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,7 +20,7 @@ public class TriggerObject : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             float dirc = transform.position.x - collision.transform.position.x > 0 ? 1 : -1;
-            rigid.AddForce(new Vector2(dirc * 0.1f, 0.5f), ForceMode2D.Impulse);
+            rigid.AddForce(new Vector2(dirc * 1f, 1f), ForceMode2D.Impulse);
         }
     }
 }
