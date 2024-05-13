@@ -15,9 +15,7 @@ public class NewController : MonoBehaviour
     [SerializeField]
     private CapsuleCollider2D playerCollider;
     [SerializeField]
-    private CircleCollider2D objectCollider;
-    [SerializeField]
-    private CapsuleCollider2D attackCollider;
+    private PolygonCollider2D attackCollider;
 
     private float damage = 5f;
     private float speed = 4f;
@@ -25,7 +23,7 @@ public class NewController : MonoBehaviour
     private float runSpeed = 8f;
     private float dashSpeed = 16f;
     private float jumpForce = 400;
-    private float wallJmpForce = 400;
+    private float wallJmpForce = 10;
     private int jumpCount = 0;
     private float isRight = -1;
     [SerializeField]
@@ -40,7 +38,9 @@ public class NewController : MonoBehaviour
     bool isAttack = false;
     bool isWallJmp = false;
     bool isWall = false;
-
+    [SerializeField]
+    bool isGround = true;
+    
     bool canDmg = false;
     bool canMove = true;
     bool canDamaged = true;
@@ -51,6 +51,11 @@ public class NewController : MonoBehaviour
     private float wallChkDis = 0.15f;
     public Transform wallChk;
     public LayerMask w_Layer;
+
+    public Transform groundChk;
+    public LayerMask g_Layer;
+    private float groundChkDis = 0.2f;
+
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset[] AnimClip;
 
@@ -78,8 +83,6 @@ public class NewController : MonoBehaviour
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
         mySkeleton = GetComponent<SkeletonAnimation>();
-        Physics2D.IgnoreCollision(playerCollider, objectCollider);
-        attackCollider.enabled = false;
     }
 
     private void Awake()
@@ -87,6 +90,7 @@ public class NewController : MonoBehaviour
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         playerState = State.IDLE;
+        attackCollider.enabled = false;
     }
 
     private void Update()
@@ -154,8 +158,14 @@ public class NewController : MonoBehaviour
             isDrop = true;
         }
 
+        isGround = Physics2D.Raycast(groundChk.position, Vector2.down, groundChkDis, g_Layer);
         isWall = Physics2D.Raycast(wallChk.position, Vector2.right * isRight, wallChkDis, w_Layer);
         isWalk = false;
+
+        if (isGround)
+        {
+            isDrop = false;
+        }
 
         if (isWall)
         {
@@ -182,7 +192,7 @@ public class NewController : MonoBehaviour
         switch (state)
         {
             case State.IDLE:
-                rigid.velocity = new Vector2(0, rigid.velocity.y);
+                rigid.velocity = new Vector2(0, 0);
                 playerState = State.IDLE;
                 AscnAnimation(AnimClip[(int)state], true, 1f);
                 break;
@@ -445,7 +455,7 @@ public class NewController : MonoBehaviour
             Flip();
 
         rigid.velocity = Vector2.zero;
-        rigid.AddForce(new Vector2(dirc, 0.5f) * 4, ForceMode2D.Impulse);
+        rigid.AddForce(new Vector2(dirc, 1f) * 4, ForceMode2D.Impulse);
         setCurrentState(State.DROP);
 
         Invoke("Regain", 0.1f);
@@ -485,6 +495,7 @@ public class NewController : MonoBehaviour
         isAttack = false;
         isDash = false;
         canDmg = false;
+        attackCollider.enabled = false;
         setCurrentState(State.IDLE);
     }
 

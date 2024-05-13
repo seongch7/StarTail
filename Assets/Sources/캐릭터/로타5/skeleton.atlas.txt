@@ -287,3 +287,74 @@ TALK_005
 	rotate: 90
 화남 입@3x
 	bounds: 3639, 290, 183, 78
+
+skeleton_10.png
+	size: 3068, 2368
+	filter: Linear, Linear
+Tail Eff/hit/6@3x
+	bounds: 1690, 920, 855, 1444
+	offsets: 93, 94, 1041, 1631
+Tail Eff/hit/7@3x
+	bounds: 2547, 1560, 519, 804
+	offsets: 63, 67, 647, 936
+Tail Eff/hit/8@3x
+	bounds: 2, 2, 1686, 2362
+	offsets: 199, 226, 2082, 2813
+Tail Eff/hit/9@3x
+	bounds: 1690, 189, 729, 1250
+	rotate: 90
+
+skeleton_11.png
+	size: 2716, 3844
+	filter: Linear, Linear
+Tail Eff/Tail/10
+	bounds: 2, 2, 2499, 2050
+	offsets: 2, 3, 2503, 2056
+Tail Eff/Tail/6
+	bounds: 2, 2054, 2712, 1786
+	offsets: 3, 3, 2718, 1791
+
+skeleton_12.png
+	size: 2476, 3708
+	filter: Linear, Linear
+Tail Eff/Tail/5
+	bounds: 2, 1798, 2471, 1908
+	offsets: 3, 5, 2476, 1915
+Tail Eff/Tail/7
+	bounds: 2, 2, 2440, 1794
+	offsets: 2, 2, 2444, 1798
+
+skeleton_13.png
+	size: 3900, 3864
+	filter: Linear, Linear
+Tail Eff/Tail/11
+	bounds: 2, 1899, 2302, 1963
+	offsets: 3, 2, 2307, 1968
+Tail Eff/Tail/14
+	bounds: 1894, 68, 1215, 1829
+	offsets: 2, 3, 1219, 1834
+Tail Eff/Tail/8
+	bounds: 2306, 2055, 1589, 1807
+	offsets: 3, 2, 1595, 1812
+Tail Eff/Tail/9
+	bounds: 2, 2, 1895, 1890
+	offsets: 3, 2, 1902, 1895
+	rotate: 90
+
+skeleton_14.png
+	size: 3292, 3536
+	filter: Linear, Linear
+Tail Eff/Tail/12
+	bounds: 2, 1767, 1564, 1766
+	offsets: 3, 3, 1569, 1772
+Tail Eff/Tail/13
+	bounds: 1707, 231, 1602, 1580
+	offsets: 3, 2, 1607, 1584
+	rotate: 90
+Tail Eff/Tail/3
+	bounds: 1568, 1835, 1698, 1592
+	offsets: 2, 4, 1702, 1598
+	rotate: 90
+Tail Eff/Tail/4
+	bounds: 2, 2, 1703, 1763
+	offsets: 3, 3, 1709, 1769
