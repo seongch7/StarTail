@@ -24,12 +24,19 @@ public class RhinoController : MonoBehaviour
     private AnimState _AnimState;
 
     //현재 재생되는 애니메이션
-    public string CurrentAnimation;
+    private string CurrentAnimation;
 
     //무브 처리
     private Rigidbody2D rig;
+
+    //공격 콜라이더
+    private GameObject jumpAttack;
+    private GameObject upperAttack;
+
     [SerializeField]
     public GameObject player;
+
+    MeshRenderer meshRenderer;
 
     private float distance;
     private float duration;
@@ -38,7 +45,11 @@ public class RhinoController : MonoBehaviour
     {
         //초기 선언
         rig = GetComponent<Rigidbody2D>();
+        meshRenderer = GetComponent<MeshRenderer>();
         skeletonAnimation = GetComponent<SkeletonAnimation>();
+        
+        jumpAttack = transform.Find("JumpAttack").gameObject;
+        upperAttack = transform.Find("UpperAttack").gameObject;
 
 
         //IDLE 애니메이션 실행
@@ -55,22 +66,12 @@ public class RhinoController : MonoBehaviour
 
     private IEnumerator AnimStart(float duration)
     {
-        if (CurrentAnimation == "ATT_JUMP")
-        {
-            yield return new WaitForSeconds(1.43f);
-            Jump();
-            yield return new WaitForSeconds(0.77f);
-            rig.velocity = new Vector2(0, 0);
-            yield return new WaitForSeconds(duration - 2.2f);
-        }
-        else
-        {
-            yield return new WaitForSeconds(duration - 0.1f);
-        }
+
+        yield return new WaitForSeconds(duration);
 
         distance = (player.transform.position.x - gameObject.transform.position.x > 0) ? player.transform.position.x - gameObject.transform.position.x : gameObject.transform.position.x - player.transform.position.x;
 
-        if (distance < 4f)
+        if (distance < 3f)
         {
             _AnimState = AnimState.ATT_UPPERCUT;
         }
@@ -86,8 +87,21 @@ public class RhinoController : MonoBehaviour
         SetCurrentAnimation(_AnimState);
         Flip();
 
+        switch (CurrentAnimation)
+        {
+            case "ATT_JUMP":
+                StartCoroutine(JumpAttack());
+                break;
+            case "ATT_UPPERCUT":
+                StartCoroutine(UpperAttack());
+                break;
+
+        }
+
         duration = skeletonAnimation.skeleton.Data.FindAnimation(skeletonAnimation.AnimationName).Duration;
         StartCoroutine(AnimStart(duration));
+
+        yield break;
 
     }
     private void _AsncAnimation(AnimationReferenceAsset animClip, bool loop, float timeScale)
@@ -137,11 +151,52 @@ public class RhinoController : MonoBehaviour
         }
 
     }
-    private void Jump()
+
+    private IEnumerator JumpAttack()
     {
+        //점프 시작
+        yield return new WaitForSeconds(1.43f);
+
         float dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
 
         rig.velocity = new Vector2(6 * dir, 0);
 
+        //점프 착지
+        yield return new WaitForSeconds(0.77f);
+
+        rig.velocity = new Vector2(0, 0);
+        jumpAttack.SetActive(true);
+
+        //공격 판정 0.2초
+        yield return new WaitForSeconds(0.2f);
+
+        jumpAttack.SetActive(false);
+
+        yield break;
+    }
+
+    private IEnumerator UpperAttack()
+    {
+        //공격 시작
+        yield return new WaitForSeconds(0.85f);
+        upperAttack.SetActive(true);
+
+        //공격 판정 0.1초
+        yield return new WaitForSeconds(0.1f);
+
+        upperAttack.SetActive(false);
+
+        yield break;
+    }
+    public void OnDamaged()
+    {
+        rig.velocity = Vector2.zero;
+        meshRenderer.materials[0].color = new Color(1, 1, 1, 0.4f);
+        Invoke("Regain", 0.1f);
+    }
+
+    private void Regain()
+    {
+        meshRenderer.materials[0].color = new Color(1, 1, 1, 1f);
     }
 }
