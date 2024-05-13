@@ -5,11 +5,6 @@ using Spine.Unity;
 
 public class RhinoController : MonoBehaviour
 {
-    //스파인 애니메이션 관련
-    public SkeletonAnimation skeletonAnimation;
-    public AnimationReferenceAsset[] AnimClip;
-    public Spine.TrackEntry trackItemNow;
-
     //애니메이션 enum
     public enum AnimState
     {
@@ -20,7 +15,11 @@ public class RhinoController : MonoBehaviour
         CC_BOUNCE,
         CC_GROGGY
     }
-    
+
+    //스파인 애니메이션 관련
+    private SkeletonAnimation skeletonAnimation;
+    public AnimationReferenceAsset[] AnimClip;
+
     //현재 처리 되는 애니메이션
     private AnimState _AnimState;
 
@@ -32,17 +31,24 @@ public class RhinoController : MonoBehaviour
     [SerializeField]
     public GameObject player;
 
-    float distance;
-    float duration;
+    public float distance;
+    public float duration;
 
     private void Awake()
     {
+        //초기 선언
         rig = GetComponent<Rigidbody2D>();
+        skeletonAnimation = GetComponent<SkeletonAnimation>();
+
+
+        //IDLE 애니메이션 실행
+        _AnimState = AnimState.IDLE;
+        CurrentAnimation = AnimClip[0].name;
+        duration = 2.667f;
 
         Flip();
-        SetCurrentAnimation(AnimState.IDLE);
+        SetCurrentAnimation(_AnimState);
 
-        duration = skeletonAnimation.skeleton.Data.FindAnimation(skeletonAnimation.AnimationName).Duration;
         StartCoroutine(AnimStart(duration));
     }
 
@@ -107,6 +113,9 @@ public class RhinoController : MonoBehaviour
                 _AsncAnimation(AnimClip[(int)_state], true, 1f);
                 break;
             case AnimState.ATT_UPPERCUT:
+                _AsncAnimation(AnimClip[(int)_state], true, 1f);
+                break;
+            case AnimState.ATT_HEADING:
                 _AsncAnimation(AnimClip[(int)_state], true, 1f);
                 break;
         }
