@@ -24,15 +24,15 @@ public class RhinoController : MonoBehaviour
     private AnimState _AnimState;
 
     //현재 재생되는 애니메이션
-    private string CurrentAnimation;
+    public string CurrentAnimation;
 
     //무브 처리
     private Rigidbody2D rig;
     [SerializeField]
     public GameObject player;
 
-    public float distance;
-    public float duration;
+    private float distance;
+    private float duration;
 
     private void Awake()
     {
@@ -52,9 +52,21 @@ public class RhinoController : MonoBehaviour
         StartCoroutine(AnimStart(duration));
     }
 
-    private IEnumerator AnimStart(float duration) 
+
+    private IEnumerator AnimStart(float duration)
     {
-        yield return new WaitForSeconds(duration - 0.1f);
+        if (CurrentAnimation == "ATT_JUMP")
+        {
+            yield return new WaitForSeconds(1.43f);
+            Jump();
+            yield return new WaitForSeconds(0.77f);
+            rig.velocity = new Vector2(0, 0);
+            yield return new WaitForSeconds(duration - 2.2f);
+        }
+        else
+        {
+            yield return new WaitForSeconds(duration - 0.1f);
+        }
 
         distance = (player.transform.position.x - gameObject.transform.position.x > 0) ? player.transform.position.x - gameObject.transform.position.x : gameObject.transform.position.x - player.transform.position.x;
 
@@ -71,8 +83,8 @@ public class RhinoController : MonoBehaviour
             _AnimState = AnimState.IDLE;
         }
 
-        Flip();
         SetCurrentAnimation(_AnimState);
+        Flip();
 
         duration = skeletonAnimation.skeleton.Data.FindAnimation(skeletonAnimation.AnimationName).Duration;
         StartCoroutine(AnimStart(duration));
@@ -84,19 +96,9 @@ public class RhinoController : MonoBehaviour
         if (animClip.name.Equals(CurrentAnimation))
             return;
 
-        if (loop)
-        {
-            //해당 애니메이션으로 변경
-            skeletonAnimation.state.SetAnimation(0, animClip, loop);
-        }
-        else
-        {
-            //해당 애니메이션으로 변경
-            skeletonAnimation.state.SetAnimation(0, animClip, loop);
-
-            skeletonAnimation.state.AddAnimation(0, AnimClip[0], true,0);
-
-        }
+        //해당 애니메이션으로 변경
+        skeletonAnimation.state.SetAnimation(0, animClip, loop);
+       
 
         //현재 재생되고 있는 애니메이션 값 변경
         CurrentAnimation = animClip.name;
@@ -123,9 +125,9 @@ public class RhinoController : MonoBehaviour
 
     private void Flip()
     {
-        bool dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? true : false;
+        float dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
 
-        if (dir)
+        if (dir==1)
         {
             gameObject.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
@@ -133,5 +135,13 @@ public class RhinoController : MonoBehaviour
         {
             gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
+
+    }
+    private void Jump()
+    {
+        float dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
+
+        rig.velocity = new Vector2(6 * dir, 0);
+
     }
 }
