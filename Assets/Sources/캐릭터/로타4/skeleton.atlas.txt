@@ -1,0 +1,244 @@
+skeleton.png
+	size: 2504, 3348
+	filter: Linear, Linear
+Tail_000
+	bounds: 2, 1674, 2500, 1670
+Tail_001
+	bounds: 2, 2, 2500, 1670
+
+skeleton_2.png
+	size: 2504, 3348
+	filter: Linear, Linear
+Tail_002
+	bounds: 2, 1674, 2500, 1670
+Tail_003
+	bounds: 2, 2, 2500, 1670
+
+skeleton_3.png
+	size: 2504, 3348
+	filter: Linear, Linear
+Tail_004
+	bounds: 2, 1674, 2500, 1670
+Tail_005
+	bounds: 2, 2, 2500, 1670
+
+skeleton_4.png
+	size: 2504, 3348
+	filter: Linear, Linear
+Tail_006
+	bounds: 2, 1674, 2500, 1670
+Tail_007
+	bounds: 2, 2, 2500, 1670
+
+skeleton_5.png
+	size: 2504, 3348
+	filter: Linear, Linear
+Tail_008
+	bounds: 2, 1674, 2500, 1670
+Tail_009
+	bounds: 2, 2, 2500, 1670
+
+skeleton_6.png
+	size: 4060, 4048
+	filter: Linear, Linear
+- 얼굴@3x
+	bounds: 1557, 1309, 568, 495
+	rotate: 90
+Tail_010
+	bounds: 2, 2376, 2500, 1670
+ㅇㅅㅇ 얼굴@3x
+	bounds: 2045, 743, 564, 495
+	rotate: 90
+ㅖ 얼굴@3x
+	bounds: 2054, 1313, 564, 496
+	rotate: 90
+걱정 얼굴@3x
+	bounds: 2071, 177, 564, 495
+	rotate: 90
+기본 얼굴@3x
+	bounds: 3050, 1538, 563, 495
+	rotate: 90
+꼬리@3x
+	bounds: 2, 487, 1553, 1614
+먀 얼굴@3x
+	bounds: 3547, 1538, 563, 495
+	rotate: 90
+모자 뒤@3x
+	bounds: 1557, 741, 566, 486
+	rotate: 90
+뭐 얼굴@3x
+	bounds: 3536, 973, 563, 495
+	rotate: 90
+미소 얼굴@3x
+	bounds: 3536, 408, 563, 495
+	rotate: 90
+반함 얼굴@3x
+	bounds: 2542, 747, 564, 495
+	rotate: 90
+뿌엥 얼굴@3x
+	bounds: 2552, 1537, 564, 496
+	rotate: 90
+앙큼 얼굴@3x
+	bounds: 2568, 181, 564, 495
+	rotate: 90
+언짢 얼굴@3x
+	bounds: 3039, 971, 564, 495
+	rotate: 90
+전체@3x
+	bounds: 2504, 2103, 1553, 1943
+	offsets: 326, 264, 2067, 2470
+케이프 뒤@3x
+	bounds: 779, 154, 644, 331
+케이프 아래 뒤@3x
+	bounds: 2, 2, 775, 483
+케이프@3x
+	bounds: 1425, 154, 644, 331
+호오 얼굴@3x
+	bounds: 1557, 1879, 615, 495
+
+skeleton_7.png
+	size: 3492, 912
+	filter: Linear, Linear
+- 입@3x
+	bounds: 3153, 623, 131, 39
+	rotate: 90
+TALK_000
+	bounds: 3463, 439, 75, 24
+	offsets: 0, 26, 75, 80
+	rotate: 90
+TALK_007
+	bounds: 3463, 439, 75, 24
+	offsets: 0, 26, 75, 80
+	rotate: 90
+TALK_001
+	bounds: 3398, 103, 73, 42
+	offsets: 1, 8, 75, 80
+TALK_006
+	bounds: 3398, 103, 73, 42
+	offsets: 1, 8, 75, 80
+TALK_002
+	bounds: 3463, 362, 75, 24
+	offsets: 0, 27, 75, 80
+	rotate: 90
+TALK_004
+	bounds: 3463, 362, 75, 24
+	offsets: 0, 27, 75, 80
+	rotate: 90
+TALK_003
+	bounds: 2635, 369, 48, 46
+	offsets: 13, 17, 75, 80
+TALK_005
+	bounds: 3398, 70, 73, 31
+	offsets: 1, 19, 75, 80
+ㅇㅅㅇ 입@3x
+	bounds: 3235, 3, 54, 27
+ㅖ 입@3x
+	bounds: 2635, 350, 45, 17
+걱정 입@3x
+	bounds: 3167, 242, 88, 23
+	rotate: 90
+귀 오 노랑@3x
+	bounds: 2454, 604, 303, 306
+귀 오 분홍@3x
+	bounds: 3195, 342, 172, 266
+	rotate: 90
+귀 왼 노랑@3x
+	bounds: 2432, 23, 257, 325
+귀 왼 분홍@3x
+	bounds: 2691, 8, 164, 289
+기본 입@3x
+	bounds: 3247, 32, 78, 25
+다리 아래 오@3x
+	bounds: 1955, 3, 236, 342
+다리 아래 왼@3x
+	bounds: 2193, 6, 237, 342
+먀 입@3x
+	bounds: 3247, 59, 174, 78
+	rotate: 90
+모자@3x
+	bounds: 3153, 756, 299, 154
+몸통@3x
+	bounds: 2691, 299, 303, 301
+	rotate: 90
+뭐 입@3x
+	bounds: 3473, 84, 61, 17
+	rotate: 90
+미소 입@3x
+	bounds: 2566, 354, 61, 33
+	rotate: 90
+바지 오@3x
+	bounds: 2759, 609, 199, 301
+바지 왼@3x
+	bounds: 2960, 609, 191, 301
+반함 입@3x
+	bounds: 3327, 147, 149, 86
+벨트@3x
+	bounds: 2454, 524, 234, 78
+뿌엥 입@3x
+	bounds: 2601, 366, 49, 32
+	rotate: 90
+셔츠 뒤@3x
+	bounds: 3195, 516, 238, 272
+	rotate: 90
+손 아래 오@3x
+	bounds: 875, 6, 358, 339
+손 아래 왼@3x
+	bounds: 1235, 6, 358, 339
+손 위 오@3x
+	bounds: 2994, 332, 199, 275
+손 위 왼@3x
+	bounds: 2857, 21, 199, 276
+앙큼 입@3x
+	bounds: 3327, 34, 111, 69
+	rotate: 90
+언짢 입@3x
+	bounds: 2454, 360, 110, 55
+얼굴@3x
+	bounds: 1992, 350, 460, 560
+영혼눈 오@3x
+	bounds: 2, 2, 20, 38
+	rotate: 90
+오른쪽 바지@3x
+	bounds: 2454, 417, 105, 231
+	rotate: 90
+왼쪽 바지@3x
+	bounds: 3195, 235, 105, 231
+	rotate: 90
+우쒸 얼굴@3x
+	bounds: 2, 347, 563, 495
+	rotate: 90
+우쒸 입@3x
+	bounds: 3428, 239, 101, 55
+	rotate: 90
+우와 얼굴@3x
+	bounds: 499, 347, 563, 496
+	rotate: 90
+우와 입@3x
+	bounds: 3058, 132, 198, 107
+	rotate: 90
+웁 입@3x
+	bounds: 3454, 783, 127, 35
+	rotate: 90
+읍 얼굴@3x
+	bounds: 997, 347, 563, 495
+	rotate: 90
+케이프 리본@3x
+	bounds: 3058, 13, 117, 97
+	rotate: 90
+케이프 아래 오 뒤@3x
+	bounds: 1595, 25, 320, 358
+	rotate: 90
+케이프 아래 오@3x
+	bounds: 440, 14, 331, 433
+	rotate: 90
+케이프 아래 왼@3x
+	bounds: 2, 24, 321, 436
+	rotate: 90
+호오 입@3x
+	bounds: 3157, 11, 76, 37
+화남 얼굴@3x
+	bounds: 1494, 347, 563, 496
+	rotate: 90
+화남 입@3x
+	bounds: 3167, 50, 183, 78
+	rotate: 90
