@@ -13,7 +13,6 @@ public class AttackController : MonoBehaviour
 
         if (col.CompareTag ("Player"))
         {
-            Debug.Log("asd");
             col.gameObject.GetComponent<NewController>().OnDamaged(transform.position);
             col.gameObject.GetComponent<LivingEntity>().HealthDown(damage);
             transform.gameObject.SetActive(false);

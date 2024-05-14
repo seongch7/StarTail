@@ -253,8 +253,6 @@ public class NewController : MonoBehaviour
 
     void OnKeyboard(KeyCode key)
     {
-        if (!canMove)
-            return;
         
         if (keys.Contains(key))
         {
@@ -309,7 +307,7 @@ public class NewController : MonoBehaviour
 
     void Move(KeyCode key)
     {
-        if (isWallJmp || isDash || isAttack)
+        if (isWallJmp || isDash || isAttack || !canMove)
             return;
 
         
@@ -431,7 +429,7 @@ public class NewController : MonoBehaviour
         {
             if (col.CompareTag("Enemy") && canDmg)
             {
-                col.gameObject.GetComponent<MonsterMove>().OnDamaged();
+                col.gameObject.GetComponent<RhinoController>().OnDamaged();
                 col.gameObject.GetComponent<LivingEntity>().HealthDown(damage);
                 attackCollider.enabled = false;
                 canDmg = false;

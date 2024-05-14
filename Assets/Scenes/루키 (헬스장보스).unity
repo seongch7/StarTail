@@ -310,8 +310,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.19060004, y: -2.6329, z: 0}
-    m_Extent: {x: 1.2039, y: 3.2352998, z: 0}
+    m_Center: {x: -0.18980002, y: -2.6332002, z: 0}
+    m_Extent: {x: 1.2035, y: 3.2349, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -890,8 +890,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.19030005, y: -2.6342502, z: 0}
-    m_Extent: {x: 1.2037001, y: 3.23555, z: 0}
+    m_Center: {x: -0.19, y: -2.63285, z: 0}
+    m_Extent: {x: 1.2035999, y: 3.23585, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -1463,8 +1463,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.19064999, y: -2.6341, z: 0}
-    m_Extent: {x: 1.20385, y: 3.2357001, z: 0}
+    m_Center: {x: -0.18959999, y: -2.63395, z: 0}
+    m_Extent: {x: 1.204, y: 3.23585, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -2981,7 +2981,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3036,7 +3036,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -3669,8 +3669,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.02155, y: 0.4723, z: 0}
-    m_Extent: {x: 1.7836499, y: 1.1333001, z: 0}
+    m_Center: {x: 0.021200001, y: 0.4729, z: 0}
+    m_Extent: {x: 1.7837, y: 1.1328, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -4826,8 +4826,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.19020003, y: -2.63375, z: 0}
-    m_Extent: {x: 1.2044001, y: 3.2351499, z: 0}
+    m_Center: {x: -0.19045001, y: -2.6335502, z: 0}
+    m_Extent: {x: 1.20455, y: 3.23555, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -6260,8 +6260,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: -0.19, y: -2.6334, z: 0}
-    m_Extent: {x: 1.2047999, y: 3.236, z: 0}
+    m_Center: {x: -0.18989998, y: -2.63345, z: 0}
+    m_Extent: {x: 1.2038, y: 3.23555, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -6344,8 +6344,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.020999968, y: 0.47384998, z: 0}
-    m_Extent: {x: 1.7841, y: 1.13315, z: 0}
+    m_Center: {x: 0.020750046, y: 0.47365, z: 0}
+    m_Extent: {x: 1.78335, y: 1.13355, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -7208,7 +7208,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!251 &1664202793
