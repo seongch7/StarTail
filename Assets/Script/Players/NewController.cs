@@ -28,6 +28,7 @@ public class NewController : MonoBehaviour
     private float isRight = -1;
     [SerializeField]
     bool isWalk = false;
+    [SerializeField]
     bool isRun = false;
     bool isDash = false;
     [SerializeField]
@@ -40,9 +41,11 @@ public class NewController : MonoBehaviour
     bool isWall = false;
     [SerializeField]
     bool isGround = true;
-    
+    bool isDamaged = false;
+
     bool canDmg = false;
     bool canMove = true;
+    [SerializeField]
     bool canDamaged = true;
     [SerializeField]
     bool down = false;
@@ -72,7 +75,8 @@ public class NewController : MonoBehaviour
         JUMP,
         DROP,
         HANG,
-        ATTACK
+        ATTACK,
+        DAMAGED
     }
 
     public State playerState;
@@ -91,6 +95,7 @@ public class NewController : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         playerState = State.IDLE;
         attackCollider.enabled = false;
+        DontDestroyOnLoad(this);
     }
 
     private void Update()
@@ -106,7 +111,7 @@ public class NewController : MonoBehaviour
                 }
                 break;
             case State.RUN:
-                if (!isRun)
+                if (!isRun || !isWalk)
                 {
                     setCurrentState(State.IDLE);
                 }
@@ -150,6 +155,12 @@ public class NewController : MonoBehaviour
                     setCurrentState(State.IDLE);
                 }
                 break;
+            case State.DAMAGED:
+                if (!isDamaged)
+                {
+                    setCurrentState(State.IDLE);
+                }
+                break;
         }
 
         if (rigid.velocity.y < 0)
@@ -162,7 +173,7 @@ public class NewController : MonoBehaviour
         isWall = Physics2D.Raycast(wallChk.position, Vector2.right * isRight, wallChkDis, w_Layer);
         isWalk = false;
 
-        if (isGround)
+        if (isGround && !isDamaged)
         {
             isDrop = false;
         }
@@ -232,6 +243,10 @@ public class NewController : MonoBehaviour
                 AscnAnimation(AnimClip[(int)state], false, 2f);
                 Invoke("CanDmg", 0.2f);
                 Invoke("stopCounter", 0.3f);
+                break;
+            case State.DAMAGED:
+                playerState = State.DAMAGED;
+                AscnAnimation(AnimClip[(int)state], false, 1f);
                 break;
         }
     }
@@ -312,7 +327,7 @@ public class NewController : MonoBehaviour
             {
                 speed = runSpeed;
             }
-            else if (isWalk)
+            else
             {
                 speed = walkSpeed;
             }
@@ -331,7 +346,7 @@ public class NewController : MonoBehaviour
             {
                 speed = runSpeed;
             }
-            else if (isWalk)
+            else
             {
                 speed = walkSpeed;
             }
@@ -353,7 +368,7 @@ public class NewController : MonoBehaviour
                 speed = runSpeed;
                 setCurrentState(State.RUN);
             }
-            else if (isWalk)
+            else
             {
                 speed = walkSpeed;
                 setCurrentState(State.WALK);
@@ -396,7 +411,7 @@ public class NewController : MonoBehaviour
     }
     
 
-    private void OnCollisionStay2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.contacts[0].normal.y > 0.7f)
         {
@@ -447,6 +462,7 @@ public class NewController : MonoBehaviour
             return;
 
         mySkeleton.skeleton.SetColor(Color.red);
+        isDamaged = true;
         canDamaged = false;
         canMove = false;
 
@@ -456,11 +472,11 @@ public class NewController : MonoBehaviour
 
         rigid.velocity = Vector2.zero;
         rigid.AddForce(new Vector2(dirc, 1f) * 4, ForceMode2D.Impulse);
-        setCurrentState(State.DROP);
+        setCurrentState(State.DAMAGED);
 
         Invoke("Regain", 0.1f);
         Invoke("CanMove", 0.5f);
-        Invoke("OffDamaged", 2);
+        Invoke("OffDamaged", 1f);
     }
 
     private void Regain()
@@ -469,6 +485,7 @@ public class NewController : MonoBehaviour
     }
     private void CanMove()
     {
+        isDamaged = false;
         canMove = true;
     }
     private void CanDmg()

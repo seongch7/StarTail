@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour
     {
         cameraHalfWidth = Camera.main.aspect * Camera.main.orthographicSize;
         cameraHalfHeight = Camera.main.orthographicSize;
+        DontDestroyOnLoad(this);
     }
 
     private void FixedUpdate()

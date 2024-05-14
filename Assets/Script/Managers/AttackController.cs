@@ -11,8 +11,9 @@ public class AttackController : MonoBehaviour
     private void OnTriggerStay2D(Collider2D col)
     {
 
-        if (col.CompareTag("Player"))
+        if (col.CompareTag ("Player"))
         {
+            Debug.Log("asd");
             col.gameObject.GetComponent<NewController>().OnDamaged(transform.position);
             col.gameObject.GetComponent<LivingEntity>().HealthDown(damage);
             transform.gameObject.SetActive(false);
