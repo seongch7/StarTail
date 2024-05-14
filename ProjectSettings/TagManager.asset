@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Item
   - Light
+  - OneWayPlatform
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Ground
   - ForeGround
   - Background
-  - 
+  - Slope
   - 
   - 
   - 
@@ -94,4 +95,22 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: SKY
+    uniqueID: 1982120665
+    locked: 0
+  - name: BACKGROUND
+    uniqueID: 2187667557
+    locked: 0
+  - name: FIX OBJ
+    uniqueID: 1260323593
+    locked: 0
+  - name: MOVING OBJ
+    uniqueID: 2503948359
+    locked: 0
+  - name: CHARACTER
+    uniqueID: 2490758895
+    locked: 0
+  - name: FRONT
+    uniqueID: 4084754437
     locked: 0

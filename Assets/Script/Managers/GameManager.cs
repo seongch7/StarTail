@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public Button button;
     public TalkManager talkManager;
     public GameObject ChatBubble;
     public TypeEffect talk;
@@ -56,7 +57,7 @@ public class GameManager : MonoBehaviour
         ChatBubble.SetActive(isAction);
     }
 
-    private void Talk(int id, bool isNPC)
+    public void Talk(int id, bool isNPC)
     {
         string talkData = talkManager.GetTalk(id, talkIndex);
 
@@ -66,7 +67,6 @@ public class GameManager : MonoBehaviour
             talkIndex = 0;
             return;
         }
-            
 
         if (isNPC)
         {

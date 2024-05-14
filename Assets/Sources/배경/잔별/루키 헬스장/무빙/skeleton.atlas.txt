@@ -1,0 +1,40 @@
+skeleton.png
+	size: 796, 1552
+	filter: Linear, Linear
+Asset 95@3x
+	bounds: 2, 612, 370, 938
+	offsets: 193, 174, 746, 1292
+Asset 96@3x
+	bounds: 374, 1016, 534, 378
+	offsets: 189, 185, 906, 750
+	rotate: 90
+고리1@3x
+	bounds: 754, 638, 39, 23
+고리2@3x
+	bounds: 374, 614, 47, 68
+	rotate: 90
+글러브1@3x
+	bounds: 2, 206, 249, 411
+	rotate: 90
+글러브2@3x
+	bounds: 374, 816, 198, 415
+	rotate: 90
+신발@3x
+	bounds: 415, 2, 253, 371
+	rotate: 90
+잎1@3x
+	bounds: 300, 41, 103, 163
+잎2@3x
+	bounds: 572, 257, 67, 404
+잎3@3x
+	bounds: 374, 663, 151, 405
+	rotate: 90
+잎4@3x
+	bounds: 641, 358, 111, 303
+펀칭@3x
+	bounds: 2, 457, 153, 568
+	rotate: 90
+화분@3x
+	bounds: 2, 27, 177, 296
+	offsets: 99, 0, 374, 398
+	rotate: 90

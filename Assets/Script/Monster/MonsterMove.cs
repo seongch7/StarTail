@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class MonsterMove : MonoBehaviour
 {
@@ -10,20 +8,23 @@ public class MonsterMove : MonoBehaviour
     Animator anim;
     MeshRenderer meshRenderer;
     BoxCollider2D boxCollider;
-    public int nextMove;//행동지표 결정
-    public float isRight = -1;
+
+    
+    private float damage = 1f;
+    private float isRight = -1;
     private Transform target;
     private float dirc;
     private float dis;
-    [SerializeField]
     private bool isGround = true;
+
     public Transform groundChk;
     public LayerMask g_Layer;
-    [SerializeField]
-    private float groundChkDis;
+    private float groundChkDis = 0.2f;
+
+    private bool canDmg;
     void Start()
     {
-        target = FindObjectOfType<PlayerController>().transform;
+        target = FindObjectOfType<NewController>().transform;
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         meshRenderer = GetComponent<MeshRenderer>();
@@ -58,23 +59,12 @@ public class MonsterMove : MonoBehaviour
         {
             Turn();
             rigid.velocity = new Vector2(dirc * -1, rigid.velocity.y);
-            Invoke("Update", 2f);
         }
         
         if ((dirc > 0 && isRight < 0) || (dirc < 0 && isRight > 0))
         {
             Turn();
         }
-    }
-
-    private void Think()
-    {
-        nextMove = Random.Range(-1, 2);
-
-        anim.SetInteger("walkSpeed", nextMove);
-
-        float nextThinkTime = Random.Range(2, 5);
-        Invoke("Think", nextThinkTime);
     }
 
     void Turn()
@@ -85,22 +75,30 @@ public class MonsterMove : MonoBehaviour
 
     public void OnDamaged()
     {
+        rigid.velocity = Vector2.zero;
         meshRenderer.materials[0].color = new Color(1, 1, 1, 0.4f);
-        //meshRenderer.flipY = true;
-        boxCollider.enabled = false;
-        anim.SetBool("isMove", false);
-        rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
-        Invoke("DeActive", 2);
-    }
-    
-    void DeActive()
-    {
-        gameObject.SetActive(false);
+        Invoke("Regain", 0.1f);
     }
 
+    private void Regain()
+    {
+        meshRenderer.materials[0].color = new Color(1, 1, 1, 1f);
+    }
     void Pursuit()
     {
         anim.SetBool("isMove", true);
         rigid.velocity = new Vector2(dirc * 1, rigid.velocity.y);
+    }
+
+    private void OnCollisionStay2D(Collision2D col)
+    {
+        if (col != null)
+        {
+            if (col.gameObject.layer == 7)
+            {
+                col.gameObject.GetComponent<NewController>().OnDamaged(transform.position);
+                col.gameObject.GetComponent<LivingEntity>().HealthDown(damage);
+            }
+        }
     }
 }
