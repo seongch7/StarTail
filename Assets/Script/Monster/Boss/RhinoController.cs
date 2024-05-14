@@ -51,7 +51,7 @@ public class RhinoController : MonoBehaviour
         //초기 선언
         rig = GetComponent<Rigidbody2D>();
         meshRenderer = GetComponent<MeshRenderer>();
-
+        player = GameObject.FindWithTag("Player");
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         
         //공격 관련
@@ -199,11 +199,13 @@ public class RhinoController : MonoBehaviour
 
     private IEnumerator JumpAttack()
     {
+        dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
+
         //점프 시작
         yield return new WaitForSeconds(1.43f);
 
 
-        dir = (player.transform.position.x - gameObject.transform.position.x > 0) ? 1 : -1;
+        
 
         rig.velocity = new Vector2(6 * dir, 0);
 

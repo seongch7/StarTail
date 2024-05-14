@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class NewController : MonoBehaviour
 {
+
     private Animator animator;
     private Rigidbody2D rigid;
     private SkeletonAnimation mySkeleton;
@@ -16,52 +16,49 @@ public class NewController : MonoBehaviour
     private CapsuleCollider2D playerCollider;
     [SerializeField]
     private PolygonCollider2D attackCollider;
-
+    
     private float damage = 5f;
-    private float speed = 4f;
-    private float walkSpeed = 4f;
-    private float runSpeed = 8f;
-    private float dashSpeed = 16f;
-    private float jumpForce = 400;
-    private float wallJmpForce = 10;
+    private float speed = 2f;
+    private float walkSpeed = 3f;
+    private float runSpeed = 6f;
+    private float dashSpeed = 10f;
+    private float jumpForce = 600;
+    private float wallJmpForce = 10f;
     private int jumpCount = 0;
     private float isRight = -1;
-    [SerializeField]
+    private float groundChkDis = 0.35f;
+    private float wallChkDis = 0.15f;
+    private float slopeDownAngle;
+    
     bool isWalk = false;
-    [SerializeField]
     bool isRun = false;
     bool isDash = false;
-    [SerializeField]
     bool isJump = false;
-    [SerializeField]
     bool isDrop = false;
     bool isHang = false;
     bool isAttack = false;
     bool isWallJmp = false;
     bool isWall = false;
-    [SerializeField]
     bool isGround = true;
     bool isDamaged = false;
-
+    bool isOnSlope = false;
     bool canDmg = false;
     bool canMove = true;
-    [SerializeField]
     bool canDamaged = true;
-    [SerializeField]
     bool down = false;
     bool coolTime = true;
 
-    private float wallChkDis = 0.15f;
     public Transform wallChk;
-    public LayerMask w_Layer;
-
     public Transform groundChk;
+
+    public LayerMask w_Layer;
     public LayerMask g_Layer;
-    private float groundChkDis = 0.2f;
+    public LayerMask s_Layer;
 
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset[] AnimClip;
 
+    private Vector2 slopeNormalPerp;
     List<KeyCode> keys = new List<KeyCode>()
     { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.DownArrow,
         KeyCode.Space, KeyCode.X, KeyCode.LeftShift, KeyCode.Z };
@@ -171,9 +168,22 @@ public class NewController : MonoBehaviour
 
         isGround = Physics2D.Raycast(groundChk.position, Vector2.down, groundChkDis, g_Layer);
         isWall = Physics2D.Raycast(wallChk.position, Vector2.right * isRight, wallChkDis, w_Layer);
-        isWalk = false;
 
-        if (isGround && !isDamaged)
+        RaycastHit2D hit = Physics2D.Raycast(groundChk.position, Vector2.down, groundChkDis, s_Layer);
+        if (hit)
+        {
+            slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
+            slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+            if (slopeDownAngle != 0)
+            {
+                isOnSlope = true;
+            }
+        }
+        else
+            isOnSlope = false;
+
+        if ((isGround && !isDamaged) || isOnSlope)
         {
             isDrop = false;
         }
@@ -184,6 +194,8 @@ public class NewController : MonoBehaviour
             rigid.velocity = new Vector2(rigid.velocity.x, 0);
             setCurrentState(State.HANG);
         }
+
+        isWalk = false;
     }
 
     private void AscnAnimation(AnimationReferenceAsset animClip, bool loop, float timeScale)
@@ -213,14 +225,14 @@ public class NewController : MonoBehaviour
                 break;
             case State.RUN:
                 playerState = State.RUN;
-                AscnAnimation(AnimClip[(int)state], true, 2f);
+                AscnAnimation(AnimClip[(int)state], true, 1.5f);
                 break;
             case State.DASH:
                 coolTime = false;
                 playerState = State.DASH;
-                AscnAnimation(AnimClip[(int)state], true, 3f);
+                AscnAnimation(AnimClip[(int)state], true, 2f);
                 Invoke("stopCounter", 0.2f);
-                Invoke("CoolDown", 1.2f);
+                Invoke("CoolDown", 1f);
                 break;
             case State.JUMP:
                 playerState = State.JUMP;
@@ -240,13 +252,13 @@ public class NewController : MonoBehaviour
                 isAttack = true;
                 playerState = State.ATTACK;
                 rigid.velocity = new Vector2(0,rigid.velocity.y);
-                AscnAnimation(AnimClip[(int)state], false, 2f);
-                Invoke("CanDmg", 0.2f);
-                Invoke("stopCounter", 0.3f);
+                AscnAnimation(AnimClip[(int)state], false, 1.3f);
+                Invoke("CanDmg", 0.3f);
+                Invoke("stopCounter", 0.7f);
                 break;
             case State.DAMAGED:
                 playerState = State.DAMAGED;
-                AscnAnimation(AnimClip[(int)state], false, 1f);
+                AscnAnimation(AnimClip[(int)state], false, 1.7f);
                 break;
         }
     }
@@ -310,7 +322,6 @@ public class NewController : MonoBehaviour
         if (isWallJmp || isDash || isAttack || !canMove)
             return;
 
-        
         if (isJump)
         {
             setCurrentState(State.JUMP);
@@ -381,10 +392,10 @@ public class NewController : MonoBehaviour
             {
                 isWallJmp = true;
                 Invoke("FreezeX", 0.3f);
-                rigid.velocity = new Vector2(-isRight * wallJmpForce, 0.9f * wallJmpForce);
+                rigid.velocity = new Vector2(-isRight * wallJmpForce, 0.9f * wallJmpForce + 3f);
                 Flip();
             }
-            if (jumpCount < 2)
+            else if (jumpCount < 2)
             {
                 jumpCount++;
                 rigid.velocity = new Vector2(rigid.velocity.x, 0);
@@ -396,15 +407,23 @@ public class NewController : MonoBehaviour
         {
             if (isRight == 1)
                 Flip();
-
-            rigid.velocity = new Vector2(speed * -1, rigid.velocity.y);
+            if (isGround && isOnSlope)
+            {
+                rigid.velocity = new Vector2(speed * slopeNormalPerp.x, rigid.velocity.y * slopeNormalPerp.y * -1);
+            }
+            else
+                rigid.velocity = new Vector2(speed * -1, rigid.velocity.y);
         }
         else if (key == KeyCode.RightArrow)
         {
             if (isRight != 1)
                 Flip();
-
-            rigid.velocity = new Vector2(speed, rigid.velocity.y);
+            if(isGround && isOnSlope)
+            {
+                rigid.velocity = new Vector2(speed * slopeNormalPerp.x * -1, rigid.velocity.y * slopeNormalPerp.y);
+            }
+            else
+                rigid.velocity = new Vector2(speed, rigid.velocity.y);
         }
     }
     
@@ -450,7 +469,7 @@ public class NewController : MonoBehaviour
         BoxCollider2D platformCollider = currentOneWayPlatform.GetComponent<BoxCollider2D>();
 
         Physics2D.IgnoreCollision(playerCollider, platformCollider);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
 
     }
@@ -461,7 +480,7 @@ public class NewController : MonoBehaviour
 
         mySkeleton.skeleton.SetColor(Color.red);
         isDamaged = true;
-        canDamaged = false;
+        gameObject.layer = 8;
         canMove = false;
 
         float dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
@@ -469,7 +488,7 @@ public class NewController : MonoBehaviour
             Flip();
 
         rigid.velocity = Vector2.zero;
-        rigid.AddForce(new Vector2(dirc, 1f) * 4, ForceMode2D.Impulse);
+        rigid.AddForce(new Vector2(dirc, 1f) * 6, ForceMode2D.Impulse);
         setCurrentState(State.DAMAGED);
 
         Invoke("Regain", 0.1f);
@@ -493,7 +512,7 @@ public class NewController : MonoBehaviour
     }
     private void OffDamaged()
     {
-        canDamaged = true;
+        gameObject.layer = 7;
     }
     private void FreezeX()
     {

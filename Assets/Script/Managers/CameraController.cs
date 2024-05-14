@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public Transform target;
+    private Transform target;
 
     public float smoothSpeed = 3;
     public Vector2 offset;
@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     {
         cameraHalfWidth = Camera.main.aspect * Camera.main.orthographicSize;
         cameraHalfHeight = Camera.main.orthographicSize;
-        DontDestroyOnLoad(this);
+        target = GameObject.FindWithTag("Player").transform;
     }
 
     private void FixedUpdate()
