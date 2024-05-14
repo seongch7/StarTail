@@ -228,7 +228,7 @@ public class RhinoController : MonoBehaviour
         upperAttack.SetActive(true);
 
         //공격 판정 0.1초
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
 
         upperAttack.SetActive(false);
 
