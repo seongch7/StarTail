@@ -17,7 +17,7 @@ public class NewController : MonoBehaviour
     [SerializeField]
     private PolygonCollider2D attackCollider;
     
-    private float damage = 5f;
+    private float damage = 1f;
     private float speed = 2f;
     private float walkSpeed = 3f;
     private float runSpeed = 6f;
@@ -61,7 +61,7 @@ public class NewController : MonoBehaviour
     private Vector2 slopeNormalPerp;
     List<KeyCode> keys = new List<KeyCode>()
     { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.DownArrow,
-        KeyCode.Space, KeyCode.X, KeyCode.LeftShift, KeyCode.Z };
+        KeyCode.Space, KeyCode.D, KeyCode.LeftShift, KeyCode.A };
 
     public enum State
     {
@@ -298,14 +298,14 @@ public class NewController : MonoBehaviour
                 {
                     if (playerState != State.ATTACK)
                     {
-                        if (key == KeyCode.Z)
+                        if (key == KeyCode.A)
                         {
                             setCurrentState(State.ATTACK);
                             return;
                         }
                         else if (playerState != State.DASH)
                         {
-                            if (key != KeyCode.X)
+                            if (key != KeyCode.D)
                             {
                                 isWalk = true;
                             }
@@ -326,10 +326,10 @@ public class NewController : MonoBehaviour
         {
             setCurrentState(State.JUMP);
 
-            if (key == KeyCode.X && coolTime)
+            if (key == KeyCode.D && coolTime)
             {
                 isDash = true;
-                rigid.velocity = new Vector2(isRight * dashSpeed, rigid.velocity.y);
+                rigid.velocity = new Vector2(isRight * dashSpeed, 0);
                 setCurrentState(State.DASH);
             }
             else if (isRun)
@@ -345,10 +345,10 @@ public class NewController : MonoBehaviour
         {
             setCurrentState(State.DROP);
 
-            if (key == KeyCode.X && coolTime)
+            if (key == KeyCode.D && coolTime)
             {
                 isDash = true;
-                rigid.velocity = new Vector2(isRight * dashSpeed, rigid.velocity.y);
+                rigid.velocity = new Vector2(isRight * dashSpeed, 0);
                 setCurrentState(State.DASH);
             }
             else if (isRun)
@@ -362,7 +362,7 @@ public class NewController : MonoBehaviour
         }
         else
         {
-            if (key == KeyCode.X && coolTime)
+            if (key == KeyCode.D && coolTime)
             {
                 isDash = true;
                 rigid.velocity = new Vector2(isRight * dashSpeed, rigid.velocity.y);

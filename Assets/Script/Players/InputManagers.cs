@@ -46,14 +46,14 @@ public class InputManager : MonoBehaviour
                 KeyAction.Invoke(KeyCode.Space);
             }
 
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.D))
             {
-                KeyAction.Invoke(KeyCode.X);
+                KeyAction.Invoke(KeyCode.D);
             }
 
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                KeyAction.Invoke(KeyCode.Z);
+                KeyAction.Invoke(KeyCode.A);
             }
         }
     }
