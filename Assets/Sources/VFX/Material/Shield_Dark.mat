@@ -63,9 +63,9 @@ Material:
     - _CameraFadingEnabled: 0
     - _CameraFarFadeDistance: 2
     - _CameraNearFadeDistance: 1
-    - _Cell_Density: 10.42
-    - _Cell_Power: 2.31
-    - _Cell_Time: 1.84
+    - _Cell_Density: 9.6
+    - _Cell_Power: 1.5
+    - _Cell_Time: 1
     - _ColorMode: 0
     - _Cull: 2
     - _Cutoff: 0.5
@@ -77,11 +77,11 @@ Material:
     - _DstBlendAlpha: 0
     - _FlipbookBlending: 0
     - _FlipbookMode: 0
-    - _Fresnel_Effect: 1.21
+    - _Fresnel_Effect: 1.25
     - _Glossiness: 0
     - _Metallic: 0
     - _Mode: 0
-    - _Offset: 1.64
+    - _Offset: 1.45
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -97,7 +97,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.017328624, g: 0.017328624, b: 0.032510336, a: 1}
+    - _Color: {r: 0.024612775, g: 0.024612775, b: 0.048765495, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
