@@ -10,13 +10,21 @@ public class AttackController : MonoBehaviour
     private bool isEnemy;
     private void OnTriggerStay2D(Collider2D col)
     {
-
-        if (col.gameObject.layer == 7)
+        if (col != null)
         {
-            col.gameObject.GetComponent<NewController>().OnDamaged(transform.position);
-            col.gameObject.GetComponent<LivingEntity>().HealthDown(damage);
-            transform.gameObject.SetActive(false);
-
+            switch (col.gameObject.layer)
+            {
+                case 6:
+                    col.gameObject.GetComponent<LivingEntity>().OnDamaged();
+                    col.gameObject.GetComponent<LivingEntity>().HealthDown(damage);
+                    transform.gameObject.SetActive(false);
+                    break;
+                case 7:
+                    col.gameObject.GetComponent<NewController>().OnDamaged(transform.position);
+                    col.gameObject.GetComponent<LivingEntity>().HealthDown(damage);
+                    transform.gameObject.SetActive(false);
+                    break;
+            }
         }
     }
 

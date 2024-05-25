@@ -281,15 +281,4 @@ public class RhinoController : MonoBehaviour
 
         yield break;
     }
-    public void OnDamaged()
-    {
-        rig.velocity = Vector2.zero;
-        meshRenderer.materials[0].color = new Color(1, 1, 1, 0.4f);
-        Invoke("Regain", 0.1f);
-    }
-
-    private void Regain()
-    {
-        meshRenderer.materials[0].color = new Color(1, 1, 1, 1f);
-    }
 }

@@ -9,9 +9,10 @@ public class Managers : MonoBehaviour
     public static Managers Instance { get { Init(); return s_instance; } } // 유일한 매니저를 호출
 
     private static InputManager _input = new InputManager();
-
+    private static ResourceManager _resource = new ResourceManager();
 
     public static InputManager Input { get { return _input; } }
+    public static ResourceManager Resource { get { return _resource; } }
 
     void Start()
     {

@@ -17,6 +17,7 @@ public class NewController : MonoBehaviour
     [SerializeField]
     private PolygonCollider2D attackCollider;
     
+    //이동 관련 변수
     private float damage = 1f;
     private float speed = 2f;
     private float walkSpeed = 3f;
@@ -29,7 +30,6 @@ public class NewController : MonoBehaviour
     private float groundChkDis = 0.35f;
     private float wallChkDis = 0.15f;
     private float slopeDownAngle;
-    
     bool isWalk = false;
     bool isRun = false;
     bool isDash = false;
@@ -48,13 +48,16 @@ public class NewController : MonoBehaviour
     bool down = false;
     bool coolTime = true;
 
+    //레이어 체크 변수
     public Transform wallChk;
     public Transform groundChk;
-
+    
     public LayerMask w_Layer;
     public LayerMask g_Layer;
     public LayerMask s_Layer;
 
+    //공격 콜라이더
+    private GameObject attack;
     public SkeletonAnimation skeletonAnimation;
     public AnimationReferenceAsset[] AnimClip;
 
@@ -92,7 +95,9 @@ public class NewController : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         playerState = State.IDLE;
         attackCollider.enabled = false;
+        attack = transform.Find("Attack").gameObject;
         DontDestroyOnLoad(this);
+        
     }
 
     private void Update()
@@ -169,6 +174,7 @@ public class NewController : MonoBehaviour
         isGround = Physics2D.Raycast(groundChk.position, Vector2.down, groundChkDis, g_Layer);
         isWall = Physics2D.Raycast(wallChk.position, Vector2.right * isRight, wallChkDis, w_Layer);
 
+        //경사로 체크
         RaycastHit2D hit = Physics2D.Raycast(groundChk.position, Vector2.down, groundChkDis, s_Layer);
         if (hit)
         {
@@ -185,7 +191,7 @@ public class NewController : MonoBehaviour
 
         if ((isGround && !isDamaged) || isOnSlope)
         {
-            isDrop = false;
+            isDrop = false; // 애니메이션 제한
         }
 
         if (isWall)
@@ -253,8 +259,7 @@ public class NewController : MonoBehaviour
                 playerState = State.ATTACK;
                 rigid.velocity = new Vector2(0,rigid.velocity.y);
                 AscnAnimation(AnimClip[(int)state], false, 1.3f);
-                Invoke("CanDmg", 0.3f);
-                Invoke("stopCounter", 0.7f);
+                StartCoroutine(Attack());
                 break;
             case State.DAMAGED:
                 playerState = State.DAMAGED;
@@ -283,7 +288,7 @@ public class NewController : MonoBehaviour
                 {
                     if (currentOneWayPlatform != null)
                     {
-                        StartCoroutine(DisableCollision());
+                        StartCoroutine(DisableCollision()); //하단 점프
                         setCurrentState(State.DROP);
                         return;
                     }
@@ -427,6 +432,21 @@ public class NewController : MonoBehaviour
         }
     }
     
+    private IEnumerator Attack()
+    {
+        yield return new WaitForSeconds(0.38f); // 공격 선딜
+
+        attack.SetActive(true);
+
+        yield return new WaitForSeconds(0.15f); // 공격 판정시간
+
+        attack.SetActive(false);
+
+        yield return new WaitForSeconds(0.17f);
+
+        isAttack = false;
+        yield break;
+    }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
@@ -442,20 +462,6 @@ public class NewController : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D col)
-    {
-        if(col != null)
-        {
-            if (col.CompareTag("Enemy") && canDmg)
-            {
-                col.gameObject.GetComponent<RhinoController>().OnDamaged();
-                col.gameObject.GetComponent<LivingEntity>().HealthDown(damage);
-                attackCollider.enabled = false;
-                canDmg = false;
-            }
-        }
-    }
-
     private void OnCollisionExit2D(Collision2D col)
     {
         if (col.gameObject.CompareTag("OneWayPlatform"))
@@ -467,7 +473,7 @@ public class NewController : MonoBehaviour
     private IEnumerator DisableCollision()
     {
         BoxCollider2D platformCollider = currentOneWayPlatform.GetComponent<BoxCollider2D>();
-
+        //발판 아랫점프
         Physics2D.IgnoreCollision(playerCollider, platformCollider);
         yield return new WaitForSeconds(1f);
         Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
@@ -492,44 +498,47 @@ public class NewController : MonoBehaviour
         setCurrentState(State.DAMAGED);
 
         Invoke("Regain", 0.1f);
-        Invoke("CanMove", 0.5f);
-        Invoke("OffDamaged", 1f);
+        Invoke("CanMove", 0.5f); // 경직시간
+        Invoke("OffDamaged", 1f); // 무적시간
     }
 
     private void Regain()
     {
         mySkeleton.skeleton.SetColor(Color.white);
     }
+
     private void CanMove()
     {
         isDamaged = false;
         canMove = true;
     }
+
     private void CanDmg()
     {
         attackCollider.enabled = true;
         canDmg = true;
     }
+
     private void OffDamaged()
     {
         gameObject.layer = 7;
     }
+
     private void FreezeX()
     {
         isWallJmp = false;
         isHang = false;
     }
+
     private void Flip()
     {
         transform.eulerAngles = new Vector3(0, Mathf.Abs(transform.eulerAngles.y - 180), 0);
         isRight = isRight * -1;
     }
+
     void stopCounter()
     {
-        isAttack = false;
         isDash = false;
-        canDmg = false;
-        attackCollider.enabled = false;
         setCurrentState(State.IDLE);
     }
 
