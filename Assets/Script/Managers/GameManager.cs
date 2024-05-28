@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
     public int stageIndex = 0;
     public int Hp;
 
-    public PlayerController player;
     public GameObject[] stages;
 
     public GameObject hill;
@@ -82,52 +81,11 @@ public class GameManager : MonoBehaviour
         isAction = true;
         talkIndex++;
     }
-    public void NextStage()
-    {
-        if(stageIndex < stages.Length - 1)
-        {
-            stages[stageIndex].SetActive(false);
-            stageIndex++;
-            stages[stageIndex].SetActive(true);
-            PlayerReposition();
-        }
-        else
-        {
-            Time.timeScale = 0;
-        }
-        
 
-        totalPoint += stagePoint;
-        stagePoint = 0;
-    }
-
-    public void HealthDown()
-    {
-        if(Hp > 0)
-            Hp--;
-        else
-        {
-            player.OnDie();
-        }
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            if(Hp > 1)
-                PlayerReposition();
-
-            HealthDown();
-        }
-
         if (collision.gameObject.name == "Entry")
             return;
-    }
-
-    void PlayerReposition()
-    {
-        player.transform.position = new Vector3(-7, 11.5f, -1);
-        player.VelocityZero();
     }
 
     public void OpenWay()

@@ -20,7 +20,7 @@ public class Monster : MonoBehaviour
     {
         timeAfterSpawn = 0f;
         spawnRate = Random.Range(spawnRateMin, spawnRateMax);
-        target = FindObjectOfType<PlayerController>().transform;
+        target = FindObjectOfType<NewController>().transform;
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         meshRenderer = GetComponent<MeshRenderer>();

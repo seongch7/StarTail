@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Define
 {
-    public enum Scene
+    public enum Scene //씬매니저에서 사용할 씬들
     {
         Unknown,
         Main,
-        Game,
+        Rookie_Boss,
+        Login
     }
 
     public enum UIEvent

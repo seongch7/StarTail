@@ -6,11 +6,7 @@ public class MonsterMove : MonoBehaviour
 {
     Rigidbody2D rigid;
     Animator anim;
-    MeshRenderer meshRenderer;
-    BoxCollider2D boxCollider;
 
-    
-    private float damage = 1f;
     private float isRight = -1;
     private Transform target;
     private float dirc;
@@ -21,21 +17,18 @@ public class MonsterMove : MonoBehaviour
     public LayerMask g_Layer;
     private float groundChkDis = 0.2f;
 
-    private bool canDmg;
-    void Start()
+    void Awake()
     {
         target = FindObjectOfType<NewController>().transform;
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        meshRenderer = GetComponent<MeshRenderer>();
-        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     private void Update()
     {
         dis = Vector3.Distance(transform.position, target.position);
     }
-    //물리기반은 fixedupadate
+    
     void FixedUpdate()
     {
         dirc = target.position.x - transform.position.x;
@@ -73,32 +66,9 @@ public class MonsterMove : MonoBehaviour
         isRight = isRight * -1;
     }
 
-    public void OnDamaged()
-    {
-        rigid.velocity = Vector2.zero;
-        meshRenderer.materials[0].color = new Color(1, 1, 1, 0.4f);
-        Invoke("Regain", 0.1f);
-    }
-
-    private void Regain()
-    {
-        meshRenderer.materials[0].color = new Color(1, 1, 1, 1f);
-    }
     void Pursuit()
     {
         anim.SetBool("isMove", true);
         rigid.velocity = new Vector2(dirc * 1, rigid.velocity.y);
-    }
-
-    private void OnCollisionStay2D(Collision2D col)
-    {
-        if (col != null)
-        {
-            if (col.gameObject.layer == 7)
-            {
-                col.gameObject.GetComponent<NewController>().OnDamaged(transform.position);
-                col.gameObject.GetComponent<LivingEntity>().HealthDown(damage);
-            }
-        }
     }
 }

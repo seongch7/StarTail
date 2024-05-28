@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneChange : MonoBehaviour
+public class SceneChange : MonoBehaviour //프로토타입용 임시, 추후 삭제
 {
     [SerializeField]
     private Canvas canvas;

@@ -21,7 +21,7 @@ public class Bullet : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            PlayerController controller = other.GetComponent<PlayerController>();
+            NewController controller = other.GetComponent<NewController>();
 
             if(controller != null)
             {
