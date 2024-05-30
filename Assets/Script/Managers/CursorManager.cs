@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CursorManage : MonoBehaviour
+public class CursorManager : MonoBehaviour
 {
     Texture2D click;
     Texture2D original;
