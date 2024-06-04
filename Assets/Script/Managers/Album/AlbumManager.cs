@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class AchiveManager : MonoBehaviour
+public class AlbumManager : MonoBehaviour
 {
     public GameObject[] LockImage;
     public GameObject[] UnlockImage;
