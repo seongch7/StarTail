@@ -22,10 +22,13 @@ public class ResourceManager
         return Object.Instantiate(prefab, parent); //생성해서 붙일 parent, object를 안붙이면 재귀적으로 호출되어서 붙여야 함
     }
 
-    public void Destroy(GameObject prefab)
+    public void Destroy(GameObject go)
     {
-        if (prefab = null)
+        if (go == null)
+        {
             return;
-        Object.Destroy(prefab);
+        }
+
+        Object.Destroy(go);
     }
 }

@@ -20,7 +20,7 @@ public class AttackController : MonoBehaviour
                     transform.gameObject.SetActive(false);
                     break;
                 case 7:
-                    col.gameObject.GetComponent<NewController>().OnDamaged(transform.position);
+                    col.gameObject.GetComponent<PlayerController>().OnDamaged(transform.position);
                     col.gameObject.GetComponent<LivingEntity>().HealthDown(damage);
                     transform.gameObject.SetActive(false);
                     break;

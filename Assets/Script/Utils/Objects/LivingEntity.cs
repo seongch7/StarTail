@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class LivingEntity : MonoBehaviour
 {
-    public float ownHp;
-    public float hp;
+    public int ownHp;
+    public int hp;
     private Rigidbody2D rig;
     private MeshRenderer meshRenderer;
 
@@ -29,9 +29,11 @@ public class LivingEntity : MonoBehaviour
         meshRenderer.materials[0].color = new Color(1, 1, 1, 1f);
     }
 
-    public void HealthDown(float damage)
+    public void HealthDown(int damage)
     {
         hp -= damage;
+        if (transform.gameObject.layer == 8)
+            gameObject.GetComponentInChildren<UI_Hp>().SetHp(hp);
         if(hp <= 0)
         {
             Die();

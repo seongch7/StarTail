@@ -5,7 +5,7 @@ using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class NewController : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 
     private Animator animator;
@@ -14,11 +14,8 @@ public class NewController : MonoBehaviour
     private GameObject currentOneWayPlatform;
     [SerializeField]
     private CapsuleCollider2D playerCollider;
-    [SerializeField]
-    private PolygonCollider2D attackCollider;
     
     //이동 관련 변수
-    private float damage = 1f;
     private float speed = 2f;
     private float walkSpeed = 3f;
     private float runSpeed = 6f;
@@ -26,10 +23,11 @@ public class NewController : MonoBehaviour
     private float jumpForce = 600;
     private float wallJmpForce = 10f;
     private int jumpCount = 0;
-    private float isRight = -1;
     private float groundChkDis = 0.35f;
     private float wallChkDis = 0.15f;
     private float slopeDownAngle;
+    public float isRight = -1;
+
     bool isWalk = false;
     bool isRun = false;
     bool isDash = false;
@@ -42,7 +40,6 @@ public class NewController : MonoBehaviour
     bool isGround = true;
     bool isDamaged = false;
     bool isOnSlope = false;
-    bool canDmg = false;
     bool canMove = true;
     bool canDamaged = true;
     bool down = false;
@@ -87,6 +84,8 @@ public class NewController : MonoBehaviour
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
         mySkeleton = GetComponent<SkeletonAnimation>();
+
+        Managers.UI.MakeWorldSpaceUI<UI_Hp>(transform);
     }
 
     private void Awake()
@@ -94,7 +93,6 @@ public class NewController : MonoBehaviour
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         playerState = State.IDLE;
-        attackCollider.enabled = false;
         attack = transform.Find("Attack").gameObject;
         DontDestroyOnLoad(this);
         
@@ -513,11 +511,6 @@ public class NewController : MonoBehaviour
         canMove = true;
     }
 
-    private void CanDmg()
-    {
-        attackCollider.enabled = true;
-        canDmg = true;
-    }
 
     private void OffDamaged()
     {

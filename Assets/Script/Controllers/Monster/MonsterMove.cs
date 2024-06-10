@@ -19,7 +19,7 @@ public class MonsterMove : MonoBehaviour
 
     void Awake()
     {
-        target = FindObjectOfType<NewController>().transform;
+        target = FindObjectOfType<PlayerController>().transform;
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }

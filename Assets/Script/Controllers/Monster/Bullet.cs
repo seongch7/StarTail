@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 10f);
     }
 
-    
+    /*
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Player")
@@ -28,5 +28,5 @@ public class Bullet : MonoBehaviour
                 controller.OnDamaged(transform.position);
             }
         }
-    }
+    }*/
 }
